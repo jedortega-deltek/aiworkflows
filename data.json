@@ -1768,7 +1768,14 @@
       "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=22",
       "prompt": null,
       "notes": "",
-      "attached_to": [],
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
       "created_at": "2026-05-25",
       "updated_at": "2026-05-25"
     },
@@ -1960,7 +1967,14 @@
       "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=15",
       "prompt": null,
       "notes": "",
-      "attached_to": [],
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
       "created_at": "2026-05-25",
       "updated_at": "2026-05-25"
     },
@@ -1984,7 +1998,14 @@
       "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=17",
       "prompt": null,
       "notes": "",
-      "attached_to": [],
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Rewrite for LLM Readiness"
+        }
+      ],
       "created_at": "2026-05-25",
       "updated_at": "2026-05-25"
     }
