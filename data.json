@@ -143,25 +143,6 @@
     },
     {
       "id": "sol-002",
-      "title": "Certification Questions (CertQBot)",
-      "type": "ai-automation",
-      "tag": "Agent",
-      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=18&e=PkABq5",
-      "prompt": null,
-      "notes": "",
-      "attached_to": [
-        {
-          "team": "Technical Writers",
-          "category": "Certifications",
-          "section": "Finalize",
-          "activity": "Finalize / PDF / Generate / Compile Content"
-        }
-      ],
-      "created_at": "2026-05-26",
-      "updated_at": "2026-05-26"
-    },
-    {
-      "id": "sol-003",
       "title": "Replicon Terminology Accuracy Agent",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -222,7 +203,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-004",
+      "id": "sol-003",
       "title": "Certification Exam Development",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -241,7 +222,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-005",
+      "id": "sol-004",
       "title": "Transcript Cleaner",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -296,7 +277,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-006",
+      "id": "sol-005",
       "title": "Copilot",
       "type": "ai-automation",
       "tag": "Tool",
@@ -345,7 +326,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-007",
+      "id": "sol-006",
       "title": "API Documentation Creation: Using YAML File as Input",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -364,7 +345,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-008",
+      "id": "sol-007",
       "title": "Link Inspector",
       "type": "ai-automation",
       "tag": "Automation",
@@ -419,7 +400,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-009",
+      "id": "sol-008",
       "title": "Document Update Recommender",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -468,7 +449,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-010",
+      "id": "sol-009",
       "title": "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -505,7 +486,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-011",
+      "id": "sol-010",
       "title": "Style Guide Agent for Online Help",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -536,7 +517,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-012",
+      "id": "sol-011",
       "title": "Release Notes GenAI Tool",
       "type": "ai-automation",
       "tag": "GenAI Plug-in for ADO/TFS",
@@ -561,7 +542,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-013",
+      "id": "sol-012",
       "title": "Release Notes Description Creation: Bug",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -580,7 +561,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-014",
+      "id": "sol-013",
       "title": "Release Notes Description Creation: PBI/Feature",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -599,7 +580,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-015",
+      "id": "sol-014",
       "title": "Release Notes Python Script",
       "type": "ai-automation",
       "tag": "Automation",
@@ -618,7 +599,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-016",
+      "id": "sol-015",
       "title": "Weekly Workload Planning",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -637,7 +618,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-017",
+      "id": "sol-016",
       "title": "Meeting Prep Notes",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -656,7 +637,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-018",
+      "id": "sol-017",
       "title": "Meeting Summaries",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -675,7 +656,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-019",
+      "id": "sol-018",
       "title": "Email Drafting",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -694,7 +675,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-020",
+      "id": "sol-019",
       "title": "Prioritization",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -713,7 +694,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-021",
+      "id": "sol-020",
       "title": "Summarize Feedback Themes",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -732,7 +713,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-022",
+      "id": "sol-021",
       "title": "Identify Common Friction Points",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -751,7 +732,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-023",
+      "id": "sol-022",
       "title": "Prioritize Curriculum Work",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -770,7 +751,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-024",
+      "id": "sol-023",
       "title": "Generate Roadmap Recommendations",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -789,7 +770,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-025",
+      "id": "sol-024",
       "title": "Detect Content Gaps",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -808,7 +789,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-026",
+      "id": "sol-025",
       "title": "Convert Notes into Structured Plans",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -827,7 +808,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-027",
+      "id": "sol-026",
       "title": "Draft Session Descriptions",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -846,7 +827,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-028",
+      "id": "sol-027",
       "title": "Analyze Learning Trends",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -865,7 +846,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-029",
+      "id": "sol-028",
       "title": "Group Requests into Themes",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -884,7 +865,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-030",
+      "id": "sol-029",
       "title": "Generate Learning Recommendations",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -903,7 +884,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-031",
+      "id": "sol-030",
       "title": "Improve tone",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -922,7 +903,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-032",
+      "id": "sol-031",
       "title": "Generate realistic demo data",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -941,7 +922,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-033",
+      "id": "sol-032",
       "title": "Generate scenarios",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -960,7 +941,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-034",
+      "id": "sol-033",
       "title": "Create knowledge checks",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -979,7 +960,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-035",
+      "id": "sol-034",
       "title": "Convert transcript into assets",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -998,7 +979,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-036",
+      "id": "sol-035",
       "title": "Bloom's alignment",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1017,7 +998,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-037",
+      "id": "sol-036",
       "title": "CertQBot (CLX Exam Builder Agent)",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -1030,13 +1011,19 @@
           "category": "Certification & Assessments",
           "section": "Certification Workflow",
           "activity": "3 — Generate Question Ideas"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
         }
       ],
       "created_at": "2026-05-26",
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-038",
+      "id": "sol-037",
       "title": "Scenario generation",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1055,7 +1042,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-039",
+      "id": "sol-038",
       "title": "Certification Evaluation",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1080,7 +1067,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-040",
+      "id": "sol-039",
       "title": "Improve questions",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1099,7 +1086,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-041",
+      "id": "sol-040",
       "title": "Weak distractor detection",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1118,7 +1105,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-042",
+      "id": "sol-041",
       "title": "Topic generation",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1137,7 +1124,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-043",
+      "id": "sol-042",
       "title": "Turn release notes into a session",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1156,7 +1143,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-044",
+      "id": "sol-043",
       "title": "Improve a talk track",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1175,7 +1162,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-045",
+      "id": "sol-044",
       "title": "Town Hall Questions Agent",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -1194,7 +1181,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-046",
+      "id": "sol-045",
       "title": "FAQ generation",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1213,7 +1200,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-047",
+      "id": "sol-046",
       "title": "Create a \"What Changed\" Summary",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1232,7 +1219,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-048",
+      "id": "sol-047",
       "title": "Identify Learning Impact",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1251,7 +1238,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-049",
+      "id": "sol-048",
       "title": "Prioritize Content Updates",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1270,7 +1257,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-050",
+      "id": "sol-049",
       "title": "Detect Potentially Outdated Content",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1289,7 +1276,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-051",
+      "id": "sol-050",
       "title": "Identify Content Still Valid",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1308,7 +1295,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-052",
+      "id": "sol-051",
       "title": "Identify Removable Content",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1327,7 +1314,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-053",
+      "id": "sol-052",
       "title": "Generate Update Recommendations",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1346,7 +1333,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-054",
+      "id": "sol-053",
       "title": "Check Consistency Across Assets",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1365,7 +1352,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-055",
+      "id": "sol-054",
       "title": "Generate Release Training Topics",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1384,7 +1371,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-056",
+      "id": "sol-055",
       "title": "Create Customer-Facing Summaries",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1403,7 +1390,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-057",
+      "id": "sol-056",
       "title": "Build SME Review Checklists",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1422,7 +1409,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-058",
+      "id": "sol-057",
       "title": "Generate Testing/Validation Scenarios",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1441,7 +1428,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-059",
+      "id": "sol-058",
       "title": "Compare Old vs New Workflows",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1460,7 +1447,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-060",
+      "id": "sol-059",
       "title": "Generate Internal Readiness Summaries",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1479,7 +1466,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-061",
+      "id": "sol-060",
       "title": "Rewrite for LLM Readiness",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1498,7 +1485,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-062",
+      "id": "sol-061",
       "title": "Review Current Metadata",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1517,7 +1504,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-063",
+      "id": "sol-062",
       "title": "Generate Search-Friendly Variations",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1536,7 +1523,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-064",
+      "id": "sol-063",
       "title": "Improve Search Intent Alignment",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1555,7 +1542,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-065",
+      "id": "sol-064",
       "title": "Add Workflow Context",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1574,7 +1561,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-066",
+      "id": "sol-065",
       "title": "Remove Internal Jargon",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1593,7 +1580,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-067",
+      "id": "sol-066",
       "title": "Generate User Questions",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1612,7 +1599,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-068",
+      "id": "sol-067",
       "title": "Improve Retrieval Quality",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1631,7 +1618,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-069",
+      "id": "sol-068",
       "title": "Identify Missing Metadata",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1650,7 +1637,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-070",
+      "id": "sol-069",
       "title": "Convert Marketing Language into Instructional Language",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1669,7 +1656,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-071",
+      "id": "sol-070",
       "title": "Generate Keywords & Synonyms",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1688,7 +1675,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-072",
+      "id": "sol-071",
       "title": "Evaluate LLM Readiness Score",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1707,7 +1694,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-073",
+      "id": "sol-072",
       "title": "Generate Structured Metadata",
       "type": "example-prompt",
       "tag": "Example Prompt",
@@ -1726,7 +1713,7 @@
       "updated_at": "2026-05-26"
     },
     {
-      "id": "sol-074",
+      "id": "sol-073",
       "title": "PTO Process Revamp",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1738,7 +1725,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-075",
+      "id": "sol-074",
       "title": "AI Colleague (Maconomy)",
       "type": "ai-automation",
       "tag": "GenAI Plug-in for ADO/TFS",
@@ -1750,7 +1737,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-076",
+      "id": "sol-075",
       "title": "DLH Request Forms",
       "type": "ai-automation",
       "tag": "Workflow & Tracking Solutions",
@@ -1762,7 +1749,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-077",
+      "id": "sol-076",
       "title": "Release Content Assistant",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -1774,7 +1761,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-078",
+      "id": "sol-077",
       "title": "TFS Release Notes Generator",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1786,7 +1773,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-079",
+      "id": "sol-078",
       "title": "Markdown Content Storage (GitHub)",
       "type": "ai-automation",
       "tag": "Repository/Storage",
@@ -1798,7 +1785,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-080",
+      "id": "sol-079",
       "title": "Multiple Video Stitching and JSON TOC File Creation for ROCH360 (Markdown Builder)",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1810,7 +1797,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-081",
+      "id": "sol-080",
       "title": "Word-to-Markdown Converter",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1822,7 +1809,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-082",
+      "id": "sol-081",
       "title": "Costpoint Summary Excel Listing Generator",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1834,7 +1821,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-083",
+      "id": "sol-082",
       "title": "User Story and Acceptance Criteria GenAI Tool",
       "type": "ai-automation",
       "tag": "GenAI Plug-in for ADO/TFS",
@@ -1846,7 +1833,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-084",
+      "id": "sol-083",
       "title": "CLX Innovation Center SharePoint Site",
       "type": "ai-automation",
       "tag": "SharePoint Site",
@@ -1858,7 +1845,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-085",
+      "id": "sol-084",
       "title": "RoboHelp-to-Markdown Converter",
       "type": "ai-automation",
       "tag": "Automation",
@@ -1870,7 +1857,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-086",
+      "id": "sol-085",
       "title": "ROCH360 (Markdown Builder)",
       "type": "ai-automation",
       "tag": "Authoring Tool",
@@ -1882,7 +1869,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-087",
+      "id": "sol-086",
       "title": "Career Coach AI: Individual Development Plan (IDP) Creation Framework",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -1894,7 +1881,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-088",
+      "id": "sol-087",
       "title": "Agent for IAG Feature Spotlights",
       "type": "ai-automation",
       "tag": "Copilot Agent",
@@ -1906,7 +1893,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-089",
+      "id": "sol-088",
       "title": "Performance Enablement Pre-Planning and Professional Development",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1918,7 +1905,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-090",
+      "id": "sol-089",
       "title": "DLH Report: Cleaning up Raw Keyword Data",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1930,7 +1917,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-091",
+      "id": "sol-090",
       "title": "DLH Report: Analyzing Large Format Segmented Data to Generate User Intent",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1942,7 +1929,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-092",
+      "id": "sol-091",
       "title": "Deltek Product Upgrade Report: Analyzing Changes Version-by-Version",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1954,7 +1941,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-093",
+      "id": "sol-092",
       "title": "DLH Dashboard QA Analyzer",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1966,7 +1953,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-094",
+      "id": "sol-093",
       "title": "Online Help - Leverage Claude Code to accelerate the creation of online help topics for TIP",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1978,7 +1965,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-095",
+      "id": "sol-094",
       "title": "Practice Mode: Scenario‑Based Certification Trainer",
       "type": "ai-automation",
       "tag": "Prompt",
@@ -1990,7 +1977,7 @@
       "updated_at": "2026-05-25"
     },
     {
-      "id": "sol-096",
+      "id": "sol-095",
       "title": "LLM Friendly Learning Titles & Descriptions",
       "type": "ai-automation",
       "tag": "Prompt",
