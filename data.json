@@ -1,0 +1,2005 @@
+{
+  "version": 1,
+  "updated": "2026-05-25",
+  "solutions": [
+    {
+      "id": "sol-001",
+      "title": "ADO/TFS Work Item Templates",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=18",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Content Development",
+          "activity": "Create and send review communication (TFS review Task)"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Data Dictionary",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Data Dictionary",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Data Dictionary",
+          "section": "Content Development",
+          "activity": "Create and send review communication"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Planning",
+          "activity": "Run/analyze queries"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "IAG",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "IAG",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Infographics",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Infographics",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Planning",
+          "activity": "Run/analyze queries"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Planning",
+          "activity": "Create plan and provide sizing for Feature documentation"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Work Item"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Planning",
+          "activity": "Create TFS tracking task(s) and link(s) to Doc Bug"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-002",
+      "title": "Certification Questions (CertQBot)",
+      "type": "ai-automation",
+      "tag": "Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=18&e=PkABq5",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-003",
+      "title": "Replicon Terminology Accuracy Agent",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=17",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Data Dictionary",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Infographics",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-004",
+      "title": "Certification Exam Development",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=7",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-005",
+      "title": "Transcript Cleaner",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=13",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Research",
+          "activity": "Attend scrum meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Research",
+          "activity": "Attend scrum, trainings & demo meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "IAG",
+          "section": "Research",
+          "activity": "Attend demo meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Research",
+          "activity": "Attend scrum, trainings & demo meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Research",
+          "activity": "Attend scrum meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Research",
+          "activity": "Attend demo meetings"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Research",
+          "activity": "Attend trainings"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-006",
+      "title": "Copilot",
+      "type": "ai-automation",
+      "tag": "Tool",
+      "link": "https://m365.cloud.microsoft/chat?auth=2",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Data Dictionary",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Planning",
+          "activity": "Plan documentation for current release"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-007",
+      "title": "API Documentation Creation: Using YAML File as Input",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=9",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-008",
+      "title": "Link Inspector",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=16",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Developer Resources (API)",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "IAG",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Infographics",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-009",
+      "title": "Document Update Recommender",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=19",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Research",
+          "activity": "Analyze/review current documentation"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Content Development",
+          "activity": "Create Outline"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Research",
+          "activity": "Analyze/review current documentation"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Content Development",
+          "activity": "Create Outline"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-010",
+      "title": "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=10",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Planning",
+          "activity": "Plan documentation for current release"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Videos",
+          "section": "Planning",
+          "activity": "Conduct holistic planning with DU, PCD, PDM"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-011",
+      "title": "Style Guide Agent for Online Help",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=15",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Guides",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Online Help Articles",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Self-review / polish"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-012",
+      "title": "Release Notes GenAI Tool",
+      "type": "ai-automation",
+      "tag": "GenAI Plug-in for ADO/TFS",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=8",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Post Edit Review",
+          "activity": "Revise and edit content based on editorial review feedback"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-013",
+      "title": "Release Notes Description Creation: Bug",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=2",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-014",
+      "title": "Release Notes Description Creation: PBI/Feature",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=1",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Content Development",
+          "activity": "Draft Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-015",
+      "title": "Release Notes Python Script",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=11",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Technical Writers",
+          "category": "Release Notes",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-016",
+      "title": "Weekly Workload Planning",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review the following task list and create a realistic weekly workload plan. Separate work into: focused content creation, meetings, live delivery, admin tasks, review/approval time, and strategic work. Highlight potential overload areas or scheduling conflicts.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "General Tasks / Admin Support",
+          "section": "",
+          "activity": "Weekly Workload Planning"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-017",
+      "title": "Meeting Prep Notes",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on this meeting agenda, create concise prep notes including: likely discussion topics, important decisions required, potential risks/blockers, questions to ask, and recommended next steps.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "General Tasks / Admin Support",
+          "section": "",
+          "activity": "Meeting Prep Notes"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-018",
+      "title": "Meeting Summaries",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Summarize this meeting into: decisions made, actions, owners, blockers, and follow-up questions.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "General Tasks / Admin Support",
+          "section": "",
+          "activity": "Meeting Summaries"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-019",
+      "title": "Email Drafting",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Draft a concise but professional follow-up email summarizing next steps and responsibilities.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "General Tasks / Admin Support",
+          "section": "",
+          "activity": "Email Drafting"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-020",
+      "title": "Prioritization",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this task list and group into: urgent, high impact, quick wins, and long-term items.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "General Tasks / Admin Support",
+          "section": "",
+          "activity": "Prioritization"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-021",
+      "title": "Summarize Feedback Themes",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review the following customer feedback, survey responses, webinar questions, and support themes. Identify: recurring themes, common frustrations, requested topics, workflow pain points, and areas where learning content may be missing or unclear. Group findings into meaningful categories.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Summarize Feedback Themes"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-022",
+      "title": "Identify Common Friction Points",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Analyze these support cases and customer questions. Identify: recurring friction points, workflows customers struggle with, terminology confusion, onboarding gaps, and areas where additional enablement may reduce support volume.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Identify Common Friction Points"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-023",
+      "title": "Prioritize Curriculum Work",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review the following list of requested content updates, support trends, and roadmap changes. Prioritize work based on: customer impact, frequency, strategic importance, implementation effort, and business risk.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Prioritize Curriculum Work"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-024",
+      "title": "Generate Roadmap Recommendations",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Using the following inputs: customer feedback, support trends, adoption gaps, roadmap updates, and existing learning assets, suggest a prioritized learning roadmap for the next quarter.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Generate Roadmap Recommendations"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-025",
+      "title": "Detect Content Gaps",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Compare these product workflows and support themes against the existing training catalog. Identify: missing content, outdated content, duplicate content, and workflows that may require additional enablement.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Detect Content Gaps"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-026",
+      "title": "Convert Notes into Structured Plans",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Convert these rough planning notes into a structured curriculum plan including: objectives, proposed deliverables, audience, priority level, dependencies, estimated effort, and suggested sequencing.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Convert Notes into Structured Plans"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-027",
+      "title": "Draft Session Descriptions",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Write a professional session description for a customer-facing webinar. Include: who the session is for, the business problem it solves, key takeaways, and expected outcomes. Keep the tone concise, practical, and customer-focused.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Draft Session Descriptions"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-028",
+      "title": "Analyze Learning Trends",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this training participation data and identify: popular topics, declining engagement areas, potential content gaps, and recommendations for future learning investments.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Analyze Learning Trends"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-029",
+      "title": "Group Requests into Themes",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review these customer requests and group them into: onboarding needs, workflow training, reporting/analytics, administration, advanced usage, and troubleshooting themes.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Group Requests into Themes"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-030",
+      "title": "Generate Learning Recommendations",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on these support cases and product usage trends, recommend: training topics, Coffee Break sessions, job aids, certification opportunities, and proactive enablement content.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Curriculum & Planning",
+          "section": "",
+          "activity": "Generate Learning Recommendations"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-031",
+      "title": "Improve tone",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this script for a customer audience. Make it more conversational, concise, and easier to follow while keeping technical accuracy.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Content Creation",
+          "section": "Video Creation Workflow (Human + AI)",
+          "activity": "4 — Script Writing"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-032",
+      "title": "Generate realistic demo data",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Generate realistic sample project data for a professional services organization using an ERP system. Include project names, clients, budgets, resources, utilization percentages, and statuses.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Content Creation",
+          "section": "Video Creation Workflow (Human + AI)",
+          "activity": "5 — Create Supporting Assets"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-033",
+      "title": "Generate scenarios",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create three realistic troubleshooting scenarios a project manager might encounter when reviewing project budgets in Vantagepoint.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Content Creation",
+          "section": "Video Creation Workflow (Human + AI)",
+          "activity": "5 — Create Supporting Assets"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-034",
+      "title": "Create knowledge checks",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create five scenario-based knowledge check questions based on this training transcript. Include one correct answer and three plausible distractors.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Content Creation",
+          "section": "Video Creation Workflow (Human + AI)",
+          "activity": "5 — Create Supporting Assets"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-035",
+      "title": "Convert transcript into assets",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Summarize this transcript into:\n- Key takeaways\n- A one-page job aid\n- FAQ-style questions\n- A short course description",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Content Creation",
+          "section": "Video Creation Workflow (Human + AI)",
+          "activity": "7 — Repurpose Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-036",
+      "title": "Bloom's alignment",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Classify these questions using Bloom's Taxonomy and identify whether they test recall, application, analysis, or evaluation.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "2 — Draft Exam Blueprint"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-037",
+      "title": "CertQBot (CLX Exam Builder Agent)",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=20",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "3 — Generate Question Ideas"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-038",
+      "title": "Scenario generation",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create a realistic customer scenario requiring the learner to troubleshoot a project setup issue.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "3 — Generate Question Ideas"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-039",
+      "title": "Certification Evaluation",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=8",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "4 — Review for Quality"
+        },
+        {
+          "team": "Technical Writers",
+          "category": "Certifications",
+          "section": "Finalize",
+          "activity": "Finalize / PDF / Generate / Compile Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-040",
+      "title": "Improve questions",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this certification question for clarity, ambiguity, and distractor quality. Suggest improvements.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "4 — Review for Quality"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-041",
+      "title": "Weak distractor detection",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Identify which distractors are obviously incorrect and suggest stronger alternatives.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Certification & Assessments",
+          "section": "Certification Workflow",
+          "activity": "4 — Review for Quality"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-042",
+      "title": "Topic generation",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on these customer questions and support themes, suggest future webinar or Coffee Break topics.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Live Events — Coffee Breaks & Town Halls",
+          "section": "Live Event Workflow",
+          "activity": "2 — Generate Topic Ideas"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-043",
+      "title": "Turn release notes into a session",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review these release notes and identify the top 5 customer-impacting changes appropriate for a 30-minute Coffee Break session.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Live Events — Coffee Breaks & Town Halls",
+          "section": "Live Event Workflow",
+          "activity": "3 — Build Session Outline"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-044",
+      "title": "Improve a talk track",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this presentation script to sound more natural and engaging when spoken aloud.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Live Events — Coffee Breaks & Town Halls",
+          "section": "Live Event Workflow",
+          "activity": "5 — Refine Delivery"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-045",
+      "title": "Town Hall Questions Agent",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=24",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Live Events — Coffee Breaks & Town Halls",
+          "section": "Live Event Workflow",
+          "activity": "6 — Post-Event Analysis"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-046",
+      "title": "FAQ generation",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this webinar transcript and generate a customer FAQ list.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Live Events — Coffee Breaks & Town Halls",
+          "section": "Live Event Workflow",
+          "activity": "6 — Post-Event Analysis"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-047",
+      "title": "Create a \"What Changed\" Summary",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review these release notes and create: a high-level 'What Changed' summary, key workflow impacts, affected user roles, and features requiring learning updates. Focus on customer-facing impacts, not technical implementation details.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Create a \"What Changed\" Summary"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-048",
+      "title": "Identify Learning Impact",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review these release notes and identify: which courses may require updates, which videos may be outdated, certification impacts, KB articles requiring review, and workflows that may need new enablement content.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Identify Learning Impact"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-049",
+      "title": "Prioritize Content Updates",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on these release changes, prioritize learning updates using: customer impact, workflow disruption, feature visibility, frequency of use, and implementation urgency.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Prioritize Content Updates"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-050",
+      "title": "Detect Potentially Outdated Content",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Compare these release notes against the following learning content and identify: outdated screenshots, obsolete workflows, incorrect terminology, references to retired functionality, and areas requiring revision.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Detect Potentially Outdated Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-051",
+      "title": "Identify Content Still Valid",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this release information and identify which learning assets remain valid with no updates required. Explain why each asset is still applicable.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Identify Content Still Valid"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-052",
+      "title": "Identify Removable Content",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this content catalog and identify: duplicate materials, obsolete content, retired workflows, and low-value assets that could potentially be archived or removed.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Identify Removable Content"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-053",
+      "title": "Generate Update Recommendations",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "For each impacted learning asset, recommend: the type of update required, estimated level of effort, urgency, and whether the update is minor, moderate, or full redevelopment.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Generate Update Recommendations"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-054",
+      "title": "Check Consistency Across Assets",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review the following: training materials, certification questions, KB articles, webinar scripts, and online help. Identify inconsistent terminology, tone, feature naming, or workflow explanations.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Check Consistency Across Assets"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-055",
+      "title": "Generate Release Training Topics",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on these release notes, suggest: Coffee Break topics, webinar ideas, quick tip videos, job aids, and certification update opportunities.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Generate Release Training Topics"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-056",
+      "title": "Create Customer-Facing Summaries",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite these release notes into a concise customer-friendly summary focused on: business impact, workflow improvements, important changes, and recommended next steps.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Create Customer-Facing Summaries"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-057",
+      "title": "Build SME Review Checklists",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Generate an SME review checklist for validating release-related learning updates. Include: workflow accuracy, terminology validation, screenshot verification, process alignment, and customer impact review.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Build SME Review Checklists"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-058",
+      "title": "Generate Testing/Validation Scenarios",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create realistic validation scenarios to test whether updated training content still aligns with the latest release functionality.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Generate Testing/Validation Scenarios"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-059",
+      "title": "Compare Old vs New Workflows",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Compare the previous workflow against the updated release workflow and summarize: what changed, what stayed the same, customer impact, and potential confusion areas.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Compare Old vs New Workflows"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-060",
+      "title": "Generate Internal Readiness Summaries",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create an internal release readiness summary for stakeholders outlining: impacted learning assets, update priorities, risks, dependencies, and estimated effort.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "Release Readiness / General Maintenance",
+          "section": "",
+          "activity": "Generate Internal Readiness Summaries"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-061",
+      "title": "Rewrite for LLM Readiness",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this learning title and description to be more LLM-friendly and searchable. Requirements: clearly identify who the content is for, describe the exact task or workflow, explain the outcome or business purpose, use wording customers would realistically search for, avoid vague or overly branded language, and improve clarity for AI retrieval systems.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Rewrite for LLM Readiness"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-062",
+      "title": "Review Current Metadata",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review the following learning title and description for LLM readiness. Identify: vague wording, missing workflow context, unclear audience, weak search terminology, acronym overuse, and opportunities to improve discoverability.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Review Current Metadata"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-063",
+      "title": "Generate Search-Friendly Variations",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Generate five alternative learning titles optimized for: customer search behavior, natural language questions, and AI retrieval systems. Keep the wording clear, task-oriented, and workflow-focused.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Generate Search-Friendly Variations"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-064",
+      "title": "Improve Search Intent Alignment",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this description to better align with real customer search intent. Focus on: what problem the user is trying to solve, what workflow they are performing, and what outcome they expect.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Improve Search Intent Alignment"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-065",
+      "title": "Add Workflow Context",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this learning description to clearly explain: the workflow being performed, when a customer would use this process, who performs the task, and the expected result.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Add Workflow Context"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-066",
+      "title": "Remove Internal Jargon",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this title and description and replace internal terminology or vague phrasing with wording customers would realistically use when searching for help.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Remove Internal Jargon"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-067",
+      "title": "Generate User Questions",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Based on this learning asset, generate realistic customer questions someone might ask an AI assistant or search engine to find this content.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Generate User Questions"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-068",
+      "title": "Improve Retrieval Quality",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this content metadata to improve retrieval quality for: AI assistants, enterprise search, knowledge bases, and semantic search systems. Prioritize clarity, specificity, and workflow terminology.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Improve Retrieval Quality"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-069",
+      "title": "Identify Missing Metadata",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this learning asset and identify missing metadata that may improve discoverability, including: audience, workflow, product area, task type, feature names, and business outcome.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Identify Missing Metadata"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-070",
+      "title": "Convert Marketing Language into Instructional Language",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Rewrite this title and description to focus less on promotional language and more on: the task being completed, the workflow, and the practical learner outcome.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Convert Marketing Language into Instructional Language"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-071",
+      "title": "Generate Keywords & Synonyms",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Generate: keywords, related terminology, synonyms, alternate workflow names, and customer-friendly phrases that may improve discoverability for this learning asset.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Generate Keywords & Synonyms"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-072",
+      "title": "Evaluate LLM Readiness Score",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Review this learning asset and provide: an LLM readiness score (1–10), strengths, weaknesses, and recommendations to improve AI discoverability and retrieval.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Evaluate LLM Readiness Score"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-073",
+      "title": "Generate Structured Metadata",
+      "type": "example-prompt",
+      "tag": "Example Prompt",
+      "link": null,
+      "prompt": "Create structured metadata for this learning asset including: audience, workflow, task, product area, difficulty level, business outcome, related terminology, and searchable phrases.",
+      "notes": "",
+      "attached_to": [
+        {
+          "team": "Learning Content",
+          "category": "LLM Readiness",
+          "section": "",
+          "activity": "Generate Structured Metadata"
+        }
+      ],
+      "created_at": "2026-05-26",
+      "updated_at": "2026-05-26"
+    },
+    {
+      "id": "sol-074",
+      "title": "PTO Process Revamp",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=28",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-075",
+      "title": "AI Colleague (Maconomy)",
+      "type": "ai-automation",
+      "tag": "GenAI Plug-in for ADO/TFS",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=27",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-076",
+      "title": "DLH Request Forms",
+      "type": "ai-automation",
+      "tag": "Workflow & Tracking Solutions",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=25",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-077",
+      "title": "Release Content Assistant",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=23",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-078",
+      "title": "TFS Release Notes Generator",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=22",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-079",
+      "title": "Markdown Content Storage (GitHub)",
+      "type": "ai-automation",
+      "tag": "Repository/Storage",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=21",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-080",
+      "title": "Multiple Video Stitching and JSON TOC File Creation for ROCH360 (Markdown Builder)",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=14",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-081",
+      "title": "Word-to-Markdown Converter",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=12",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-082",
+      "title": "Costpoint Summary Excel Listing Generator",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=10",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-083",
+      "title": "User Story and Acceptance Criteria GenAI Tool",
+      "type": "ai-automation",
+      "tag": "GenAI Plug-in for ADO/TFS",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=9",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-084",
+      "title": "CLX Innovation Center SharePoint Site",
+      "type": "ai-automation",
+      "tag": "SharePoint Site",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=7",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-085",
+      "title": "RoboHelp-to-Markdown Converter",
+      "type": "ai-automation",
+      "tag": "Automation",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=6",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-086",
+      "title": "ROCH360 (Markdown Builder)",
+      "type": "ai-automation",
+      "tag": "Authoring Tool",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=5",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-087",
+      "title": "Career Coach AI: Individual Development Plan (IDP) Creation Framework",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=3",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-088",
+      "title": "Agent for IAG Feature Spotlights",
+      "type": "ai-automation",
+      "tag": "Copilot Agent",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=1",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-089",
+      "title": "Performance Enablement Pre-Planning and Professional Development",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=6",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-090",
+      "title": "DLH Report: Cleaning up Raw Keyword Data",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=11",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-091",
+      "title": "DLH Report: Analyzing Large Format Segmented Data to Generate User Intent",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=12",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-092",
+      "title": "Deltek Product Upgrade Report: Analyzing Changes Version-by-Version",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=13",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-093",
+      "title": "DLH Dashboard QA Analyzer",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=14",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-094",
+      "title": "Online Help - Leverage Claude Code to accelerate the creation of online help topics for TIP",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=15",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-095",
+      "title": "Practice Mode: Scenario‑Based Certification Trainer",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=16",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "id": "sol-096",
+      "title": "LLM Friendly Learning Titles & Descriptions",
+      "type": "ai-automation",
+      "tag": "Prompt",
+      "link": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=17",
+      "prompt": null,
+      "notes": "",
+      "attached_to": [],
+      "created_at": "2026-05-25",
+      "updated_at": "2026-05-25"
+    }
+  ]
+}
