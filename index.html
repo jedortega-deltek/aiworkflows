@@ -1,0 +1,4732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Workflows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Deltek 2026 palette */
+    --bg: #ffffff;              /* page background — gradient starts at white */
+    --bg-deep: #eef2f8;          /* gradient end — very subtle blue tint */
+    --bg-elev: #f1f5fa;          /* slightly deeper for elevated surfaces */
+    --paper: #ffffff;            /* card / panel surface */
+    --ink: #0e1133;              /* primary headline ink */
+    --ink-soft: #3d3d4e;         /* body text */
+    --ink-faint: #7f8195;        /* labels, captions */
+    --line: #d4dbe7;             /* borders */
+    --line-soft: #e6ecf5;        /* subtle dividers */
+    --sage: #4a6b4a;             /* AI/Automation accent — kept as functional signal */
+    --sage-light: #c8d6c2;
+    --sage-bg: #dde6d6;
+    --rust: #b85432;             /* prompts (kept for in-page Copy buttons / prompt blocks) */
+    --gold: #c9a449;             /* example-prompt accent */
+    --deltek-navy: #0A1F5E;      /* primary Deltek brand navy */
+    --deltek-blue: #1742F6;      /* bright Deltek action blue */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Mulish', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    background-attachment: fixed;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .app {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 40px 80px;
+  }
+
+  /* TOP BAR — narrow header outside .app */
+  .topbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+  }
+  .topbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .wordmark {
+    font-family: 'Mulish', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--deltek-navy);
+    text-decoration: none;
+  }
+  .wordmark em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--deltek-blue);
+  }
+  .quick-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .quick-links a {
+    font-family: 'Mulish', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+  }
+  .quick-links a:hover {
+    color: var(--deltek-blue);
+  }
+  @media (max-width: 900px) {
+    .topbar-inner {
+      padding: 12px 20px;
+      gap: 16px;
+    }
+    .quick-links {
+      gap: 14px;
+    }
+    .quick-links a {
+      font-size: 12px;
+    }
+  }
+
+
+  .lede {
+    max-width: 620px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+  }
+
+  /* SIDEBAR — DELIVERABLES */
+  aside {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .deliverables {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .deliverable {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .deliverable:hover {
+    background: var(--bg-elev);
+    color: var(--ink);
+  }
+  .deliverable.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .deliverable .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    opacity: 0.5;
+  }
+  .deliverable.active .num {
+    opacity: 0.7;
+  }
+
+  /* MAIN PANEL */
+  main { min-width: 0; }
+
+  .deliverable-header {
+    margin-bottom: 36px;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .breadcrumb span {
+    color: var(--sage);
+    font-weight: 500;
+  }
+
+  .deliverable-title {
+    font-family: 'Mulish', sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+
+  .deliverable-stats {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .stat strong {
+    font-family: 'Mulish', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .stat.green strong { color: var(--sage); }
+  .stat.yellow strong { color: var(--gold); }
+
+  /* FILTERS */
+  .filters {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin-bottom: 32px;
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .filter-row + .filter-row {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line-soft);
+  }
+
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+    min-width: 72px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .pill {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .pill:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .pill.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .pill .count {
+    opacity: 0.5;
+    margin-left: 4px;
+    font-size: 11px;
+  }
+
+  .toggle-ai {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle-ai .switch {
+    width: 32px;
+    height: 18px;
+    background: var(--line);
+    border-radius: 100px;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  .toggle-ai .switch::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: var(--paper);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+  .toggle-ai.on .switch {
+    background: var(--sage);
+  }
+  .toggle-ai.on .switch::after {
+    transform: translateX(14px);
+  }
+
+  /* WORKFLOW DISPLAY */
+  .workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .phase {
+    position: relative;
+    padding: 24px 0;
+    border-top: 1px solid var(--line-soft);
+    transition: opacity 0.2s ease;
+  }
+  .phase:first-child { border-top: none; padding-top: 0; }
+  .phase.dimmed { opacity: 0.25; }
+
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .phase-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+  }
+
+  .phase-title {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    font-style: italic;
+  }
+
+  .phase-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .activities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .activity {
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 16px 18px;
+    transition: all 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .activity:hover {
+    border-color: var(--ink-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(26, 26, 23, 0.06);
+  }
+
+  .activity.has-ai {
+    background: linear-gradient(180deg, var(--sage-bg) 0%, var(--paper) 100%);
+    border-color: var(--sage-light);
+  }
+  .activity.has-ai::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--sage);
+  }
+
+  .activity.has-prompts {
+    background: linear-gradient(180deg, rgba(201, 164, 73, 0.12) 0%, var(--paper) 100%);
+    border-color: rgba(201, 164, 73, 0.35);
+  }
+  .activity.has-prompts::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+
+  .activity-name {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .activity-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .activity-role::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .ai-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .ai-tool {
+    font-size: 12.5px;
+    color: var(--sage);
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.35;
+  }
+  .ai-tool::before {
+    content: '◆';
+    font-size: 8px;
+    line-height: 1.7;
+    flex-shrink: 0;
+  }
+  .ai-tool.prompt {
+    color: var(--rust);
+  }
+  .ai-tool.prompt::before {
+    content: '▸';
+  }
+  a.ai-tool.clickable {
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+    transition: background 0.15s ease;
+    cursor: pointer;
+  }
+  a.ai-tool.clickable:hover {
+    background: rgba(74, 107, 74, 0.12);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  a.ai-tool.prompt.clickable:hover {
+    background: rgba(184, 84, 50, 0.1);
+  }
+
+  .no-ai {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    opacity: 0.7;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--ink-faint);
+    font-family: 'Mulish', sans-serif;
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  /* TEAM SWITCHER */
+  .team-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0 0 28px;
+    padding: 6px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    width: fit-content;
+    position: relative;
+  }
+  .team-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .team-btn:hover { color: var(--ink); }
+  .team-btn.active {
+    color: var(--paper);
+  }
+  .team-btn-indicator {
+    display: inline-flex;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    opacity: 0.6;
+  }
+  .team-btn.active .team-btn-indicator {
+    background: var(--paper);
+    opacity: 1;
+  }
+  .team-pill {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    background: var(--ink);
+    border-radius: 100px;
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+  }
+
+  /* RESPONSIBILITY MAP (Curriculum Managers) */
+  .resp-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .resp-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px 24px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .resp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ink);
+    opacity: 0.7;
+  }
+  .resp-card.has-ai::before {
+    background: var(--sage);
+    opacity: 1;
+  }
+  .resp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 26, 23, 0.08);
+    border-color: var(--ink-soft);
+  }
+
+  .resp-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+
+  .resp-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+  }
+
+  .resp-card-title {
+    font-family: 'Mulish', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .resp-card-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .resp-card.has-ai .resp-card-icon {
+    border-color: var(--sage);
+    color: var(--sage);
+    background: var(--sage-bg);
+  }
+  .resp-card-icon svg {
+    width: 15px; height: 15px;
+  }
+
+  .resp-card-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .resp-card-meta .ai-count {
+    color: var(--sage);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .resp-card-meta .ai-count::before {
+    content: '◆';
+    font-size: 8px;
+  }
+  .resp-card-meta .dot {
+    width: 3px; height: 3px;
+    background: var(--ink-faint);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .resp-subs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .resp-sub {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--line-soft);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .resp-sub:first-child { border-top: none; padding-top: 0; }
+
+  .resp-sub-marker {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+  }
+  .resp-sub.has-ai .resp-sub-marker {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .resp-sub.has-ai .resp-sub-marker::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-left: 1.5px solid var(--paper);
+    border-bottom: 1.5px solid var(--paper);
+    transform: rotate(-45deg);
+    margin-top: -1px;
+  }
+
+  .resp-sub-name {
+    flex: 1;
+    color: var(--ink);
+  }
+
+  .resp-sub-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+  }
+  .resp-sub-tool {
+    font-size: 11.5px;
+    color: var(--sage);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    padding: 2px 4px;
+    margin: 0 -4px;
+    border-radius: 3px;
+  }
+  .resp-sub-tool::before {
+    content: '◆';
+    font-size: 7px;
+  }
+  .resp-sub-tool.prompt {
+    color: var(--rust);
+  }
+  .resp-sub-tool.prompt::before {
+    content: '▸';
+  }
+  a.resp-sub-tool:hover {
+    background: rgba(74, 107, 74, 0.12);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  a.resp-sub-tool.prompt:hover {
+    background: rgba(184, 84, 50, 0.1);
+  }
+  .view-toggle {
+    display: inline-flex;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 3px;
+    margin-left: auto;
+  }
+  .view-toggle button {
+    background: transparent;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .view-toggle button:hover { color: var(--ink); }
+  .view-toggle button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .view-toggle svg {
+    width: 13px; height: 13px;
+  }
+
+  /* FLOWCHART VIEW */
+  .flowchart-wrap {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 32px 20px;
+    overflow-x: auto;
+    position: relative;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+  }
+
+  .flowchart {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0;
+    min-width: 100%;
+    padding: 8px;
+  }
+
+  .flow-phase {
+    display: flex;
+    flex-direction: column;
+    min-width: 240px;
+    max-width: 280px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .flow-phase-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .flow-phase-header .phase-num {
+    opacity: 0.5;
+    margin-right: 6px;
+  }
+
+  .flow-nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+    padding: 0 12px;
+    position: relative;
+  }
+
+  .flow-node {
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    line-height: 1.35;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    z-index: 2;
+  }
+  .flow-node:hover {
+    border-color: var(--ink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 26, 23, 0.08);
+  }
+  .flow-node.has-ai {
+    background: var(--sage-bg);
+    border-color: var(--sage);
+  }
+
+  .flow-node-name {
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-size: 12.5px;
+  }
+
+  .flow-node-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+
+  .flow-node-ai-badge {
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    background: var(--sage);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .flow-node-ai-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  /* Connecting arrows between phases — aligned with phase header */
+  .flow-arrow {
+    align-self: flex-start;
+    margin-top: 12px;
+    height: 18px;
+    width: 28px;
+    flex-shrink: 0;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Detail popover */
+  .flow-detail {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 23, 0.45);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    animation: fadeIn 0.18s ease;
+  }
+  .flow-detail.open { display: flex; }
+
+  .flow-detail-card {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    position: relative;
+    animation: scaleIn 0.22s ease;
+  }
+
+  .flow-detail-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: transparent;
+    border: none;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .flow-detail-close:hover {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .flow-detail-phase {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+
+  .flow-detail-name {
+    font-family: 'Mulish', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+
+  .flow-detail-role {
+    display: inline-block;
+    background: var(--bg);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+
+  .flow-detail-tools-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+
+  .flow-detail-tool {
+    background: var(--sage-bg);
+    border-left: 3px solid var(--sage);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .flow-detail-tool.prompt {
+    background: rgba(184, 84, 50, 0.08);
+    border-left-color: var(--rust);
+  }
+  a.flow-detail-tool.clickable {
+    cursor: pointer;
+  }
+  a.flow-detail-tool.clickable:hover {
+    background: var(--sage-light);
+    transform: translateX(2px);
+  }
+  a.flow-detail-tool.prompt.clickable:hover {
+    background: rgba(184, 84, 50, 0.18);
+  }
+  .flow-detail-tool-name {
+    flex: 1;
+  }
+  .flow-detail-tool-arrow {
+    color: var(--ink-faint);
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+  a.flow-detail-tool.clickable:hover .flow-detail-tool-arrow {
+    color: var(--sage);
+    transform: translate(2px, -2px);
+  }
+  a.flow-detail-tool.prompt.clickable:hover .flow-detail-tool-arrow {
+    color: var(--rust);
+  }
+  .flow-detail-tool-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--sage);
+    color: var(--paper);
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .flow-detail-tool.prompt .flow-detail-tool-type {
+    background: var(--rust);
+  }
+
+  .flow-detail-empty {
+    background: var(--bg);
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-family: 'Mulish', sans-serif;
+    font-style: italic;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* CM DETAIL MODAL — opportunity + example prompts */
+  .flow-detail-card {
+    max-width: 620px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .cm-detail-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .cm-detail-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .cm-opportunity {
+    font-family: 'Mulish', sans-serif;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .cm-prompt {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.15s ease;
+  }
+  .cm-prompt:hover {
+    border-color: var(--ink-soft);
+  }
+  .cm-prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+  .cm-prompt-title {
+    font-family: 'Mulish', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .cm-prompt-copy {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+  .cm-prompt-copy svg {
+    width: 11px;
+    height: 11px;
+  }
+  .cm-prompt-copy:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .cm-prompt-copy.copied {
+    background: var(--sage);
+    color: var(--paper);
+    border-color: var(--sage);
+  }
+  .cm-prompt-body {
+    font-family: 'Mulish', sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+    background: var(--paper);
+    border-left: 2px solid var(--sage);
+    padding: 10px 12px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Human Task / bullet list in detail modal */
+  .cm-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cm-bullet-list li {
+    padding: 4px 0 4px 16px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .cm-bullet-list li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--ink-faint);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    top: 6px;
+  }
+
+  /* LC section group header (above a group of cards) */
+  .lc-section {
+    margin-bottom: 28px;
+  }
+  .lc-section:last-child { margin-bottom: 0; }
+  .lc-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-soft);
+    gap: 12px;
+  }
+  .lc-section-label {
+    font-family: 'Mulish', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    font-style: italic;
+    letter-spacing: -0.005em;
+  }
+  .lc-section-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* LC flow group header — spans full row */
+  .lc-flow-group-header {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 4px 8px 12px;
+    margin-top: 16px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .lc-flow-group-header:first-child {
+    margin-top: 0;
+  }
+  .lc-flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex-wrap: nowrap;
+    padding: 8px;
+    overflow-x: auto;
+  }
+  /* When arrows are present they sit flush against cards, so neutralize
+     the row gap immediately around them */
+  .lc-flow-row .flow-arrow-standalone {
+    margin: 0 -6px;
+  }
+  /* When the flowchart is in LC mode (has lc-flow-row children),
+     stack rows vertically and let them span the full width */
+  .flowchart:has(.lc-flow-row) {
+    flex-direction: column;
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+  }
+
+  /* LC opportunities list inside the Overview detail */
+  .cm-opp-list {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .cm-opp-list li {
+    margin-bottom: 6px;
+  }
+
+  /* LC workflow steps inside the Workflow detail */
+  .cm-workflow-steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+  }
+  .cm-workflow-step {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--line-soft);
+  }
+  .cm-workflow-step:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .cm-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 2px;
+    width: 26px;
+  }
+  .cm-step-body {
+    flex: 1;
+  }
+  .cm-step-name {
+    font-family: 'Mulish', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+  .cm-step-section {
+    margin-top: 8px;
+  }
+  .cm-step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .cm-step-section.ai .cm-step-label {
+    color: var(--sage);
+  }
+  .cm-step-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .cm-step-list li {
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+  .cm-step-list li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--ink-faint);
+    font-weight: 700;
+  }
+  .cm-step-section.ai .cm-step-list li::before {
+    content: '◆';
+    color: var(--sage);
+    font-size: 7px;
+    top: 5px;
+  }
+
+  /* LC before/after example block */
+  .cm-example-block {
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: var(--bg);
+    border-left: 3px solid var(--ink-faint);
+  }
+  .cm-example-block.strong {
+    background: var(--sage-bg);
+    border-left-color: var(--sage);
+  }
+  .cm-example-block.weak {
+    background: rgba(184, 84, 50, 0.06);
+    border-left-color: var(--rust);
+  }
+  .cm-example-field {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .cm-example-field:last-of-type {
+    margin-bottom: 12px;
+  }
+  .cm-example-key {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    margin-right: 8px;
+    background: var(--paper);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .cm-example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .cm-example-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .cm-example-tag.weak {
+    color: var(--rust);
+    border-color: rgba(184, 84, 50, 0.3);
+  }
+  .cm-example-tag.strong {
+    color: var(--sage);
+    border-color: var(--sage-light);
+  }
+
+  /* LC standalone flow nodes (no swim lanes) */
+  .flow-node-standalone {
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    min-width: 240px;
+    max-width: 280px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    position: relative;
+    align-self: stretch;
+  }
+  .flow-node-standalone:hover {
+    border-color: var(--ink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 26, 23, 0.08);
+  }
+  .flow-node-standalone.has-ai {
+    background: var(--sage-bg);
+    border-color: var(--sage);
+  }
+  .flow-node-standalone.has-prompts {
+    background: rgba(201, 164, 73, 0.14);
+    border-color: var(--gold);
+  }
+  .flow-node-standalone .flow-node-name {
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+  .flow-node-standalone .flow-node-kind {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    margin-bottom: 0;
+  }
+  .flow-node-standalone.has-ai .flow-node-kind {
+    color: var(--sage);
+  }
+  .flow-node-standalone.has-prompts .flow-node-kind {
+    color: var(--gold);
+  }
+  .flow-node-standalone .flow-node-ai-badge {
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    background: var(--sage);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .flow-node-standalone .flow-node-ai-badge.prompt {
+    background: var(--gold);
+  }
+
+  .flow-arrow-standalone {
+    align-self: center;
+    width: 28px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-arrow-standalone svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* LEGEND */
+  .legend {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+  }
+  .legend-swatch.ai { background: var(--sage-bg); border-color: var(--sage-light); }
+  .legend-swatch.prompt { background: rgba(201, 164, 73, 0.18); border-color: rgba(201, 164, 73, 0.45); }
+  .legend-swatch.none { background: var(--paper); }
+  .legend-icon {
+    font-size: 10px;
+  }
+  .legend-icon.tool { color: var(--sage); }
+  .legend-icon.prompt { color: var(--rust); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .app { padding: 32px 20px; }
+    .layout { grid-template-columns: 1fr; gap: 32px; }
+    aside { position: static; }
+    h1 { font-size: 38px; }
+    .deliverable-title { font-size: 32px; }
+    header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .meta { text-align: left; }
+    .deliverables {
+      flex-direction: row;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .deliverable {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .activity {
+    animation: fadeUp 0.3s ease backwards;
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- Narrow Deltek-style top bar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="wordmark">AI <em>Workflows</em></a>
+    <ul class="quick-links">
+      <li><a href="#" data-link="innovation-center">Innovation Center</a></li>
+      <li><a href="#" data-link="in-the-works">In the Works</a></li>
+      <li><a href="#" data-link="approved-innovations">Approved Innovations</a></li>
+      <li><a href="#" data-link="ce-prompt-library">CE Prompt Library</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="app">
+
+<div class="team-switcher" id="teamSwitcher">
+  <div class="team-pill" id="teamPill"></div>
+  <button class="team-btn active" data-team="tw">
+    <span class="team-btn-indicator"></span>
+    Technical Writers
+  </button>
+  <button class="team-btn" data-team="cm">
+    <span class="team-btn-indicator"></span>
+    Learning Content
+  </button>
+</div>
+
+<p class="lede" id="lede">
+  A working map of where approved AI and automation fit into the documentation work you already do. Select a deliverable, narrow by phase or role, and surface what's available — and what isn't yet.
+</p>
+
+<div class="layout">
+
+  <aside>
+    <div class="section-label" id="sidebarLabel">Deliverable</div>
+    <ul class="deliverables" id="deliverableList"></ul>
+  </aside>
+
+  <main>
+    <div class="deliverable-header">
+      <div class="breadcrumb"><span id="crumbTeam">Workflow</span> / <span id="crumbName">—</span></div>
+      <div class="deliverable-title" id="deliverableTitle">—</div>
+      <div class="deliverable-stats" id="stats"></div>
+    </div>
+
+    <div class="filters" id="filtersPanel">
+      <div class="filter-row" id="filterRowPhase">
+        <div class="filter-label" id="phaseLabel">Phase</div>
+        <div class="pills" id="phaseFilters"></div>
+      </div>
+      <div class="filter-row" id="filterRowRole">
+        <div class="filter-label">Role</div>
+        <div class="pills" id="roleFilters"></div>
+      </div>
+      <div class="filter-row" id="filterRowAi">
+        <div class="filter-label">Show</div>
+        <div class="toggle-ai" id="aiToggle">
+          <span>AI-available only</span>
+          <div class="switch"></div>
+        </div>
+      </div>
+      <div class="filter-row" id="filterRowView">
+        <div class="filter-label">View</div>
+        <div class="view-toggle" id="viewToggle">
+          <button data-view="cards" class="active">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1"/><rect x="9" y="9" width="5.5" height="5.5" rx="1"/></svg>
+            Cards
+          </button>
+          <button data-view="flow">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="0.75" y="5" width="4" height="6" rx="0.5"/><rect x="11.25" y="5" width="4" height="6" rx="0.5"/><path d="M4.75 8 L11.25 8" stroke-linecap="round"/><path d="M9.5 6.5 L11.25 8 L9.5 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Flowchart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow" id="workflow"></div>
+    <div class="flowchart-wrap" id="flowchartWrap" style="display:none;">
+      <div class="flowchart" id="flowchart"></div>
+    </div>
+    <div class="resp-map" id="respMap" style="display:none;"></div>
+
+    <div class="flow-detail" id="flowDetail">
+      <div class="flow-detail-card" id="flowDetailCard"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-swatch ai"></div>
+        <span>AI / Automation available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch prompt"></div>
+        <span>Example prompt available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch none"></div>
+        <span>No AI / Automation yet</span>
+      </div>
+    </div>
+  </main>
+
+</div>
+</div>
+
+<script>
+// ============================================================
+// TOOL URLs — extracted from the source PDF
+// Maps tool/prompt names to their SharePoint or service links
+// ============================================================
+const TOOL_URLS = {
+  "ADO/TFS Work Item Templates": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=18",
+  "Certification Questions (CertQBot)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=18&e=PkABq5",
+  "Replicon Terminology Accuracy Agent": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=17",
+  "Certification Exam Development": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=7",
+  "Transcript Cleaner": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=13",
+  "Copilot": "https://m365.cloud.microsoft/chat?auth=2",
+  "API Documentation Creation: Using YAML File as Input": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=9",
+  "Link Inspector": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=16",
+  "Document Update Recommender": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=19",
+  "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=10",
+  "Style Guide Agent for Online Help": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=15",
+  "Release Notes GenAI Tool": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=8",
+  "Release Notes Description Creation: Bug": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=2",
+  "Release Notes Description Creation: PBI/Feature": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=1",
+  "Release Notes Python Script": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=11",
+  "CertQBot (CLX Exam Builder Agent)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=20",
+  "Certification Evaluation": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=8",
+  "Town Hall Questions Agent": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=24",
+  "PTO Process Revamp": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=28",
+  "AI Colleague (Maconomy)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=27",
+  "DLH Request Forms": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=25",
+  "Release Content Assistant": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=23",
+  "TFS Release Notes Generator": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=22",
+  "Markdown Content Storage (GitHub)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=21",
+  "Multiple Video Stitching and JSON TOC File Creation for ROCH360 (Markdown Builder)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=14",
+  "Word-to-Markdown Converter": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=12",
+  "Costpoint Summary Excel Listing Generator": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=10",
+  "User Story and Acceptance Criteria GenAI Tool": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=9",
+  "CLX Innovation Center SharePoint Site": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=7",
+  "RoboHelp-to-Markdown Converter": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=6",
+  "ROCH360 (Markdown Builder)": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=5",
+  "Career Coach AI: Individual Development Plan (IDP) Creation Framework": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=3",
+  "Agent for IAG Feature Spotlights": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=1",
+  "Performance Enablement Pre-Planning and Professional Development": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=6",
+  "DLH Report: Cleaning up Raw Keyword Data": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=11",
+  "DLH Report: Analyzing Large Format Segmented Data to Generate User Intent": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=12",
+  "Deltek Product Upgrade Report: Analyzing Changes Version-by-Version": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=13",
+  "DLH Dashboard QA Analyzer": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=14",
+  "Online Help - Leverage Claude Code to accelerate the creation of online help topics for TIP": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=15",
+  "Practice Mode: Scenario‑Based Certification Trainer": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=16",
+  "LLM Friendly Learning Titles & Descriptions": "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=17"
+};
+
+// ============================================================
+// DATA — sourced from the AI Workflows PDF
+// ============================================================
+const DATA = {
+  "certifications": {
+    name: "Certifications",
+    phases: {
+      "Planning": [
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Certification Questions (CertQBot)",
+              type: "tool",
+            tag: "Agent"
+            },
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Certification Exam Development",
+              type: "prompt",
+            tag: "Prompt"
+            },
+            {
+              name: "Certification Evaluation",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "developer-resources": {
+    name: "Developer Resources (API)",
+    phases: {
+      "Research": [
+        {
+          name: "Attend scrum meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Plan documentation for current release",
+          role: "Lead Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: []
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: []
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            },
+            {
+              name: "API Documentation Creation: Using YAML File as Input",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Set up review (creates a review task as child of Doc API task)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication (TFS review Task)",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Publish API documentation",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "data-dictionary": {
+    name: "Data Dictionary",
+    phases: {
+      "Research": [
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Plan documentation for current release",
+          role: "Lead Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            }
+          ]
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Set up review (Collective Spaces/Word/PDF)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "guides": {
+    name: "Guides",
+    phases: {
+      "Research": [
+        {
+          name: "Attend scrum, trainings & demo meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Plan documentation for current release",
+          role: "Lead Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS queries",
+          role: "Data Entry Operator/Manager",
+          tools: []
+        },
+        {
+          name: "Run/analyze queries",
+          role: "Lead Technical Writer",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create plan and provide sizing for Feature documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Conduct holistic planning with DU, PCD, PDM",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            },
+            {
+              name: "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Update charter",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: []
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Create Outline",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Style Guide Agent for Online Help",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Set up review (Collective Spaces/Word/PDF)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Post Edit Review": [
+        {
+          name: "Revise and edit content based on editorial review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Copy to Help/Guide",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Mark work items Done in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "iag": {
+    name: "IAG",
+    phases: {
+      "Research": [
+        {
+          name: "Attend demo meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Conduct holistic planning with DU, PCD, PDM",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: []
+        },
+        {
+          name: "Update charter",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: []
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Create Outline",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Set up review (Collective Spaces/Word/PDF)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "infographics": {
+    name: "Infographics",
+    phases: {
+      "Planning": [
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "online-help": {
+    name: "Online Help Articles",
+    phases: {
+      "Research": [
+        {
+          name: "Attend scrum, trainings & demo meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Plan documentation for current release",
+          role: "Lead Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS queries",
+          role: "Data Entry Operator/Manager",
+          tools: []
+        },
+        {
+          name: "Run/analyze queries",
+          role: "Lead Technical Writer",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create plan and provide sizing for Feature documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Conduct holistic planning with DU, PCD, PDM",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            },
+            {
+              name: "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Update charter",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: []
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Create Outline",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Document Update Recommender",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Style Guide Agent for Online Help",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Set up review (Collective Spaces/Word/PDF)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Post Edit Review": [
+        {
+          name: "Revise and edit content based on editorial review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Copy to Help/Guide",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Deliver the help for upload, if needed",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Mark work items Done in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "release-notes": {
+    name: "Release Notes",
+    phases: {
+      "Research": [
+        {
+          name: "Attend scrum meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Attend demo meetings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Attend trainings",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Transcript Cleaner",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Analyze/review current documentation",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Ask questions to SMEs",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Review description in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Planning": [
+        {
+          name: "Plan documentation for current release",
+          role: "Lead Technical Writer",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            },
+            {
+              name: "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Run/analyze queries",
+          role: "Lead Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create plan and provide sizing for Feature documentation",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Content Development": [
+        {
+          name: "Create Outline",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Draft Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Release Notes GenAI Tool",
+              type: "tool",
+            tag: "GenAI Plug-in for ADO/TFS"
+            },
+            {
+              name: "Release Notes Description Creation: Bug",
+              type: "prompt",
+            tag: "Prompt"
+            },
+            {
+              name: "Release Notes Description Creation: PBI/Feature",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Self-review / polish",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Style Guide Agent for Online Help",
+              type: "tool",
+            tag: "Copilot Agent"
+            }
+          ]
+        },
+        {
+          name: "Set up review (Collective Spaces/Word/PDF)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Create and send review communication",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "SME Review": [
+        {
+          name: "Collaborate with the SME Reviewers",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Follow up / short reviews by email or Teams chat",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Revise": [
+        {
+          name: "Revise and edit content based on SME review feedback",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Post Edit Review": [
+        {
+          name: "Revise and edit content based on editorial review feedback",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Release Notes GenAI Tool",
+              type: "tool",
+            tag: "GenAI Plug-in for ADO/TFS"
+            }
+          ]
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            },
+            {
+              name: "Release Notes Python Script",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Copy to TFS / Release Notes Utility (for CP and VP)",
+          role: "Technical Writer",
+          tools: []
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Mark work items Done in TFS",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  },
+  "videos": {
+    name: "Videos",
+    phases: {
+      "Planning": [
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Work Item",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Create TFS tracking task(s) and link(s) to Doc Bug",
+          role: "Data Entry Operator/Manager",
+          tools: [
+            {
+              name: "ADO/TFS Work Item Templates",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        },
+        {
+          name: "Conduct holistic planning with DU, PCD, PDM",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: [
+            {
+              name: "Copilot",
+              type: "tool",
+            tag: "Tool"
+            },
+            {
+              name: "Quarterly Release Schedule Creation: Using Smartsheet Items from Prior Release",
+              type: "prompt",
+            tag: "Prompt"
+            }
+          ]
+        },
+        {
+          name: "Update charter",
+          role: "CLX Manager or CLX Curriculum Manager",
+          tools: []
+        }
+      ],
+      "Finalize": [
+        {
+          name: "Finalize / PDF / Generate / Compile Content",
+          role: "Technical Writer",
+          tools: [
+            {
+              name: "Replicon Terminology Accuracy Agent",
+              type: "tool",
+            tag: "Copilot Agent"
+            },
+            {
+              name: "Link Inspector",
+              type: "tool",
+            tag: "Automation"
+            }
+          ]
+        }
+      ],
+      "Publish": [
+        {
+          name: "Publish (to server) (DLH, TFS Pipeline)",
+          role: "Technical Writer",
+          tools: []
+        },
+        {
+          name: "Announce Publication in Teams / email",
+          role: "Technical Writer",
+          tools: []
+        }
+      ]
+    }
+  }
+};
+
+// Canonical phase order
+const PHASE_ORDER = ["Research", "Planning", "Content Development", "SME Review", "Revise", "Post Edit Review", "Finalize", "Publish"];
+
+// ============================================================
+// LEARNING CONTENT — sourced from AI Efficiency Playbook
+// "AI for Learning Content" (Training & Delivery)
+//
+// Each workflow area has a `sections` array. Each section has a `name`
+// and an `items` array. Each item is a card with:
+//   - name        : activity name
+//   - opportunity : what the activity does / where AI helps
+//                   (taken verbatim from the document where possible)
+//   - human?      : optional Human Task bullets (Video Creation workflow)
+//   - prompts?    : optional Example Prompts (title + body)
+//   - tools?      : optional AI/Automation links — add later as needed
+//                   Shape: [{ name, type: "tool"|"prompt", url? }]
+//
+// Areas with one section show no group headers (cards render directly).
+// Areas with multiple sections (e.g. Content Creation has Workflow +
+// Example Prompts) show a small group header between the two sets.
+// ============================================================
+const CM_DATA = {
+  "general-admin": {
+    name: "General Tasks / Admin Support",
+    description: "Everyday work where AI can reduce repetitive effort — workload planning, meetings, email, and prioritization.",
+    sections: [
+      {
+        name: null,
+        items: [
+          {
+            name: "Weekly Workload Planning",
+            opportunity: "Create a weekly workload map that separates content creation, live delivery, meetings, review time, and strategic work — surfacing overload areas before they happen.",
+            prompts: [
+              {
+                title: "Weekly Workload Planning",
+                body: "Review the following task list and create a realistic weekly workload plan. Separate work into: focused content creation, meetings, live delivery, admin tasks, review/approval time, and strategic work. Highlight potential overload areas or scheduling conflicts."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Meeting Prep Notes",
+            opportunity: "Convert an agenda into focused pre-meeting notes — likely topics, decisions required, risks, questions, and next steps.",
+            prompts: [
+              {
+                title: "Meeting Prep Notes",
+                body: "Based on this meeting agenda, create concise prep notes including: likely discussion topics, important decisions required, potential risks/blockers, questions to ask, and recommended next steps."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Meeting Summaries",
+            opportunity: "Turn meetings into action-focused outputs instead of generic recaps — decisions, owners, blockers, follow-ups.",
+            prompts: [
+              {
+                title: "Meeting Summaries",
+                body: "Summarize this meeting into: decisions made, actions, owners, blockers, and follow-up questions."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Email Drafting",
+            opportunity: "Identify which emails require action, draft replies, and summarise long chains into action items.",
+            prompts: [
+              {
+                title: "Email Drafting",
+                body: "Draft a concise but professional follow-up email summarizing next steps and responsibilities."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Prioritization",
+            opportunity: "Group tasks by urgency and impact to identify quick wins versus long-term work.",
+            prompts: [
+              {
+                title: "Prioritization",
+                body: "Review this task list and group into: urgent, high impact, quick wins, and long-term items."
+              }
+            ],
+            tools: []
+          }
+        ]
+      }
+    ]
+  },
+  "curriculum-planning": {
+    name: "Curriculum & Planning",
+    description: "Surface patterns across feedback, support trends, and roadmaps — and turn messy inputs into structured plans.",
+    sections: [
+      {
+        name: null,
+        items: [
+          {
+            name: "Summarize Feedback Themes",
+            opportunity: "Pull recurring themes, frustrations, and missing-content signals out of customer feedback, surveys, webinar questions, and support data.",
+            prompts: [
+              {
+                title: "Summarize Feedback Themes",
+                body: "Review the following customer feedback, survey responses, webinar questions, and support themes. Identify: recurring themes, common frustrations, requested topics, workflow pain points, and areas where learning content may be missing or unclear. Group findings into meaningful categories."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Identify Common Friction Points",
+            opportunity: "Analyze support cases to find workflows customers struggle with, terminology confusion, and onboarding gaps that drive support volume.",
+            prompts: [
+              {
+                title: "Identify Common Friction Points",
+                body: "Analyze these support cases and customer questions. Identify: recurring friction points, workflows customers struggle with, terminology confusion, onboarding gaps, and areas where additional enablement may reduce support volume."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Prioritize Curriculum Work",
+            opportunity: "Rank requested updates by customer impact, frequency, strategic importance, effort, and business risk.",
+            prompts: [
+              {
+                title: "Prioritize Curriculum Work",
+                body: "Review the following list of requested content updates, support trends, and roadmap changes. Prioritize work based on: customer impact, frequency, strategic importance, implementation effort, and business risk."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Roadmap Recommendations",
+            opportunity: "Combine feedback, support trends, adoption gaps, and roadmap updates into a prioritized quarterly learning roadmap.",
+            prompts: [
+              {
+                title: "Generate Roadmap Recommendations",
+                body: "Using the following inputs: customer feedback, support trends, adoption gaps, roadmap updates, and existing learning assets, suggest a prioritized learning roadmap for the next quarter."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Detect Content Gaps",
+            opportunity: "Compare product workflows and support themes against the existing training catalog to find missing, outdated, or duplicate content.",
+            prompts: [
+              {
+                title: "Detect Content Gaps",
+                body: "Compare these product workflows and support themes against the existing training catalog. Identify: missing content, outdated content, duplicate content, and workflows that may require additional enablement."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Convert Notes into Structured Plans",
+            opportunity: "Turn rough planning notes into a structured curriculum plan with objectives, deliverables, audience, priority, dependencies, and effort.",
+            prompts: [
+              {
+                title: "Convert Notes into Structured Plans",
+                body: "Convert these rough planning notes into a structured curriculum plan including: objectives, proposed deliverables, audience, priority level, dependencies, estimated effort, and suggested sequencing."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Draft Session Descriptions",
+            opportunity: "Write customer-facing webinar descriptions that identify the audience, the problem solved, and the expected outcomes.",
+            prompts: [
+              {
+                title: "Draft Session Descriptions",
+                body: "Write a professional session description for a customer-facing webinar. Include: who the session is for, the business problem it solves, key takeaways, and expected outcomes. Keep the tone concise, practical, and customer-focused."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Analyze Learning Trends",
+            opportunity: "Review training participation data to find popular topics, declining engagement, and gaps to invest in.",
+            prompts: [
+              {
+                title: "Analyze Learning Trends",
+                body: "Review this training participation data and identify: popular topics, declining engagement areas, potential content gaps, and recommendations for future learning investments."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Group Requests into Themes",
+            opportunity: "Categorize raw customer requests into onboarding, workflow, reporting, admin, advanced usage, and troubleshooting buckets.",
+            prompts: [
+              {
+                title: "Group Requests into Themes",
+                body: "Review these customer requests and group them into: onboarding needs, workflow training, reporting/analytics, administration, advanced usage, and troubleshooting themes."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Learning Recommendations",
+            opportunity: "From support cases and product usage, recommend specific training topics, Coffee Breaks, job aids, and certifications.",
+            prompts: [
+              {
+                title: "Generate Learning Recommendations",
+                body: "Based on these support cases and product usage trends, recommend: training topics, Coffee Break sessions, job aids, certification opportunities, and proactive enablement content."
+              }
+            ],
+            tools: []
+          }
+        ]
+      }
+    ]
+  },
+  "content-creation": {
+    name: "Content Creation",
+    description: "Generate demo data, scenarios, scripts, knowledge checks; refine tone; and repurpose content across formats.",
+    sections: [
+      {
+        name: "Video Creation Workflow (Human + AI)",
+        items: [
+          {
+            name: "1 — Identify Topic",
+            opportunity: "Analyze support cases, webinar questions, feedback forms, PX data, KB searches, and emails to identify recurring themes and suggested topics.",
+            human: [
+              "Review customer needs",
+              "Identify gaps or release priorities"
+            ],
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "2 — Create Learning Objective",
+            opportunity: "Draft learning objectives based on target audience, workflow, and business outcome.",
+            human: [
+              "Define desired learner outcome"
+            ],
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "3 — Build Outline",
+            opportunity: "Generate first-draft module outline, lesson flow, or storyboard structure.",
+            human: [
+              "Validate structure and flow"
+            ],
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "4 — Script Writing",
+            opportunity: "Draft narration scripts, simplify language, improve flow, rewrite for audience level.",
+            human: [
+              "Add expertise, nuance, and product accuracy"
+            ],
+            prompts: [
+              {
+                title: "Improve tone",
+                body: "Rewrite this script for a customer audience. Make it more conversational, concise, and easier to follow while keeping technical accuracy."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "5 — Create Supporting Assets",
+            opportunity: "Generate demo data, scenarios, character examples, visuals, knowledge checks, job aids, summaries, and transcripts.",
+            human: [
+              "Validate usability and branding"
+            ],
+            prompts: [
+              {
+                title: "Generate realistic demo data",
+                body: "Generate realistic sample project data for a professional services organization using an ERP system. Include project names, clients, budgets, resources, utilization percentages, and statuses."
+              },
+              {
+                title: "Generate scenarios",
+                body: "Create three realistic troubleshooting scenarios a project manager might encounter when reviewing project budgets in Vantagepoint."
+              },
+              {
+                title: "Create knowledge checks",
+                body: "Create five scenario-based knowledge check questions based on this training transcript. Include one correct answer and three plausible distractors."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "6 — Review & Improve",
+            opportunity: "Check tone consistency, grammar, readability, gaps, unclear explanations, and duplicate information.",
+            human: [
+              "Final quality control"
+            ],
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "7 — Repurpose Content",
+            opportunity: "Convert video/transcript into KB articles, FAQs, Coffee Break topics, course descriptions, social posts, and release summaries.",
+            human: [
+              "Decide where content should live"
+            ],
+            prompts: [
+              {
+                title: "Convert transcript into assets",
+                body: "Summarize this transcript into:\n- Key takeaways\n- A one-page job aid\n- FAQ-style questions\n- A short course description"
+              }
+            ],
+            tools: []
+          }
+        ]
+      }
+    ]
+  },
+  "certification": {
+    name: "Certification & Assessments",
+    description: "End-to-end exam work — skill-gap analysis, blueprint, question writing, quality review, and results analysis.",
+    sections: [
+      {
+        name: "Certification Workflow",
+        items: [
+          {
+            name: "1 — Identify Skill Gap",
+            opportunity: "Analyze support trends, failed questions, usage gaps, and feedback themes to find where certifications should focus.",
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "2 — Draft Exam Blueprint",
+            opportunity: "Suggest topic weighting and Bloom's level distribution for the exam.",
+            prompts: [
+              {
+                title: "Bloom's alignment",
+                body: "Classify these questions using Bloom's Taxonomy and identify whether they test recall, application, analysis, or evaluation."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "3 — Generate Question Ideas",
+            opportunity: "Create scenario-based question stems and distractors aligned to real customer workflows.",
+            tools: [
+              {
+                name: "CertQBot (CLX Exam Builder Agent)",
+                type: "tool",
+                tag: "Copilot Agent",
+                url: "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=20"
+              }
+            ],
+            prompts: [
+              {
+                title: "Scenario generation",
+                body: "Create a realistic customer scenario requiring the learner to troubleshoot a project setup issue."
+              }
+            ]
+          },
+          {
+            name: "4 — Review for Quality",
+            opportunity: "Identify weak distractors, ambiguity, and duplicate patterns across the question bank.",
+            tools: [
+              {
+                name: "Certification Evaluation",
+                type: "prompt",
+                tag: "Prompt",
+                url: "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/CLX%20Prompt%20Library/DispForm.aspx?ID=8"
+              }
+            ],
+            prompts: [
+              {
+                title: "Improve questions",
+                body: "Review this certification question for clarity, ambiguity, and distractor quality. Suggest improvements."
+              },
+              {
+                title: "Weak distractor detection",
+                body: "Identify which distractors are obviously incorrect and suggest stronger alternatives."
+              }
+            ]
+          },
+          {
+            name: "5 — Improve Consistency",
+            opportunity: "Standardize terminology, tone, and structure across exams.",
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "6 — Analyze Exam Results",
+            opportunity: "Identify confusing questions, unusually low/high pass rates, and topic weakness trends.",
+            tools: [],
+            prompts: []
+          }
+        ]
+      }
+    ]
+  },
+  "live-events": {
+    name: "Live Events — Coffee Breaks & Town Halls",
+    description: "AI support across the live event lifecycle — from topic discovery through post-event analysis.",
+    sections: [
+      {
+        name: "Live Event Workflow",
+        items: [
+          {
+            name: "1 — Identify Customer Interest Areas",
+            opportunity: "Analyze support trends, customer questions, webinar chat, roadmap updates, and community discussions.",
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "2 — Generate Topic Ideas",
+            opportunity: "Suggest session concepts and titles based on customer signals.",
+            prompts: [
+              {
+                title: "Topic generation",
+                body: "Based on these customer questions and support themes, suggest future webinar or Coffee Break topics."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "3 — Build Session Outline",
+            opportunity: "Draft a 20–30 minute structure for a Coffee Break or webinar.",
+            prompts: [
+              {
+                title: "Turn release notes into a session",
+                body: "Review these release notes and identify the top 5 customer-impacting changes appropriate for a 30-minute Coffee Break session."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "4 — Create Presentation Draft",
+            opportunity: "Generate first-pass talk track and slide content from the outline.",
+            tools: [],
+            prompts: []
+          },
+          {
+            name: "5 — Refine Delivery",
+            opportunity: "Improve tone, pacing, clarity, and transitions in the talk track.",
+            prompts: [
+              {
+                title: "Improve a talk track",
+                body: "Rewrite this presentation script to sound more natural and engaging when spoken aloud."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "6 — Post-Event Analysis",
+            opportunity: "Summarize attendee questions, sentiment, follow-ups, and future topic opportunities.",
+            tools: [
+              {
+                name: "Town Hall Questions Agent",
+                type: "tool",
+                tag: "Copilot Agent",
+                url: "https://delteko365.sharepoint.com/sites/CustomerLearningExperience/Lists/Showcase/DispForm.aspx?ID=24"
+              }
+            ],
+            prompts: [
+              {
+                title: "FAQ generation",
+                body: "Review this webinar transcript and generate a customer FAQ list."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "release-readiness": {
+    name: "Release Readiness / General Maintenance",
+    description: "Release-cycle work — identifying what changed, what needs updating, what's still valid, and what can be retired.",
+    sections: [
+      {
+        name: null,
+        items: [
+          {
+            name: "Create a \"What Changed\" Summary",
+            opportunity: "Produce a customer-facing summary of release impacts, affected roles, and learning updates needed.",
+            prompts: [
+              {
+                title: "Create a \"What Changed\" Summary",
+                body: "Review these release notes and create: a high-level 'What Changed' summary, key workflow impacts, affected user roles, and features requiring learning updates. Focus on customer-facing impacts, not technical implementation details."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Identify Learning Impact",
+            opportunity: "Map release notes to which courses, videos, certifications, and KB articles need review.",
+            prompts: [
+              {
+                title: "Identify Learning Impact",
+                body: "Review these release notes and identify: which courses may require updates, which videos may be outdated, certification impacts, KB articles requiring review, and workflows that may need new enablement content."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Prioritize Content Updates",
+            opportunity: "Rank learning updates by customer impact, workflow disruption, visibility, frequency, and urgency.",
+            prompts: [
+              {
+                title: "Prioritize Content Updates",
+                body: "Based on these release changes, prioritize learning updates using: customer impact, workflow disruption, feature visibility, frequency of use, and implementation urgency."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Detect Potentially Outdated Content",
+            opportunity: "Compare release notes against existing learning to find outdated screenshots, obsolete workflows, and retired references.",
+            prompts: [
+              {
+                title: "Detect Potentially Outdated Content",
+                body: "Compare these release notes against the following learning content and identify: outdated screenshots, obsolete workflows, incorrect terminology, references to retired functionality, and areas requiring revision."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Identify Content Still Valid",
+            opportunity: "Determine which learning assets still apply after a release — and explain why.",
+            prompts: [
+              {
+                title: "Identify Content Still Valid",
+                body: "Review this release information and identify which learning assets remain valid with no updates required. Explain why each asset is still applicable."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Identify Removable Content",
+            opportunity: "Find duplicates, obsolete content, retired workflows, and low-value assets to archive.",
+            prompts: [
+              {
+                title: "Identify Removable Content",
+                body: "Review this content catalog and identify: duplicate materials, obsolete content, retired workflows, and low-value assets that could potentially be archived or removed."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Update Recommendations",
+            opportunity: "Per affected asset, recommend update type, effort, urgency, and whether it's minor, moderate, or full redevelopment.",
+            prompts: [
+              {
+                title: "Generate Update Recommendations",
+                body: "For each impacted learning asset, recommend: the type of update required, estimated level of effort, urgency, and whether the update is minor, moderate, or full redevelopment."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Check Consistency Across Assets",
+            opportunity: "Check for consistent language and tone across videos, certification exams, online help, KBs, and VLCs.",
+            prompts: [
+              {
+                title: "Check Consistency Across Assets",
+                body: "Review the following: training materials, certification questions, KB articles, webinar scripts, and online help. Identify inconsistent terminology, tone, feature naming, or workflow explanations."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Release Training Topics",
+            opportunity: "Suggest Coffee Break topics, webinar ideas, quick tip videos, job aids, and certification update opportunities from release notes.",
+            prompts: [
+              {
+                title: "Generate Release Training Topics",
+                body: "Based on these release notes, suggest: Coffee Break topics, webinar ideas, quick tip videos, job aids, and certification update opportunities."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Create Customer-Facing Summaries",
+            opportunity: "Rewrite release notes into a concise customer-friendly summary focused on business impact and next steps.",
+            prompts: [
+              {
+                title: "Create Customer-Facing Summaries",
+                body: "Rewrite these release notes into a concise customer-friendly summary focused on: business impact, workflow improvements, important changes, and recommended next steps."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Build SME Review Checklists",
+            opportunity: "Generate SME review checklists for validating release-related learning updates.",
+            prompts: [
+              {
+                title: "Build SME Review Checklists",
+                body: "Generate an SME review checklist for validating release-related learning updates. Include: workflow accuracy, terminology validation, screenshot verification, process alignment, and customer impact review."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Testing/Validation Scenarios",
+            opportunity: "Create validation scenarios to test that updated training still aligns with the latest release functionality.",
+            prompts: [
+              {
+                title: "Generate Testing/Validation Scenarios",
+                body: "Create realistic validation scenarios to test whether updated training content still aligns with the latest release functionality."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Compare Old vs New Workflows",
+            opportunity: "Summarize what changed, what stayed the same, and potential confusion areas between old and new workflows.",
+            prompts: [
+              {
+                title: "Compare Old vs New Workflows",
+                body: "Compare the previous workflow against the updated release workflow and summarize: what changed, what stayed the same, customer impact, and potential confusion areas."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Internal Readiness Summaries",
+            opportunity: "Create internal stakeholder summaries outlining impacted assets, priorities, risks, dependencies, and effort.",
+            prompts: [
+              {
+                title: "Generate Internal Readiness Summaries",
+                body: "Create an internal release readiness summary for stakeholders outlining: impacted learning assets, update priorities, risks, dependencies, and estimated effort."
+              }
+            ],
+            tools: []
+          }
+        ]
+      }
+    ]
+  },
+  "llm-readiness": {
+    name: "LLM Readiness",
+    description: "Structuring content so AI systems can accurately retrieve, understand, summarize, and recommend it.",
+    sections: [
+      {
+        name: null,
+        items: [
+          {
+            name: "Rewrite for LLM Readiness",
+            opportunity: "Convert vague or branded content titles and descriptions into clear, workflow-focused, customer-searchable language.",
+            prompts: [
+              {
+                title: "Rewrite for LLM Readiness",
+                body: "Rewrite this learning title and description to be more LLM-friendly and searchable. Requirements: clearly identify who the content is for, describe the exact task or workflow, explain the outcome or business purpose, use wording customers would realistically search for, avoid vague or overly branded language, and improve clarity for AI retrieval systems."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Review Current Metadata",
+            opportunity: "Assess existing titles and descriptions for vague wording, missing workflow context, and weak search terminology.",
+            prompts: [
+              {
+                title: "Review Current Metadata",
+                body: "Review the following learning title and description for LLM readiness. Identify: vague wording, missing workflow context, unclear audience, weak search terminology, acronym overuse, and opportunities to improve discoverability."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Search-Friendly Variations",
+            opportunity: "Produce alternative titles optimized for customer search behavior, natural-language questions, and AI retrieval.",
+            prompts: [
+              {
+                title: "Generate Search-Friendly Variations",
+                body: "Generate five alternative learning titles optimized for: customer search behavior, natural language questions, and AI retrieval systems. Keep the wording clear, task-oriented, and workflow-focused."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Improve Search Intent Alignment",
+            opportunity: "Rewrite descriptions around the problem the user is solving, the workflow, and the outcome expected.",
+            prompts: [
+              {
+                title: "Improve Search Intent Alignment",
+                body: "Rewrite this description to better align with real customer search intent. Focus on: what problem the user is trying to solve, what workflow they are performing, and what outcome they expect."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Add Workflow Context",
+            opportunity: "Explicitly call out the workflow, when it's used, who performs it, and the expected result.",
+            prompts: [
+              {
+                title: "Add Workflow Context",
+                body: "Rewrite this learning description to clearly explain: the workflow being performed, when a customer would use this process, who performs the task, and the expected result."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Remove Internal Jargon",
+            opportunity: "Replace internal terminology with the wording customers actually use when searching.",
+            prompts: [
+              {
+                title: "Remove Internal Jargon",
+                body: "Review this title and description and replace internal terminology or vague phrasing with wording customers would realistically use when searching for help."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate User Questions",
+            opportunity: "Surface realistic customer questions an AI assistant should route to this content.",
+            prompts: [
+              {
+                title: "Generate User Questions",
+                body: "Based on this learning asset, generate realistic customer questions someone might ask an AI assistant or search engine to find this content."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Improve Retrieval Quality",
+            opportunity: "Improve metadata for AI assistants, enterprise search, knowledge bases, and semantic search.",
+            prompts: [
+              {
+                title: "Improve Retrieval Quality",
+                body: "Rewrite this content metadata to improve retrieval quality for: AI assistants, enterprise search, knowledge bases, and semantic search systems. Prioritize clarity, specificity, and workflow terminology."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Identify Missing Metadata",
+            opportunity: "Surface missing audience, workflow, product area, task type, feature names, and business outcome metadata.",
+            prompts: [
+              {
+                title: "Identify Missing Metadata",
+                body: "Review this learning asset and identify missing metadata that may improve discoverability, including: audience, workflow, product area, task type, feature names, and business outcome."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Convert Marketing Language into Instructional Language",
+            opportunity: "Move titles and descriptions away from promotional language toward task, workflow, and learner outcome.",
+            prompts: [
+              {
+                title: "Convert Marketing Language into Instructional Language",
+                body: "Rewrite this title and description to focus less on promotional language and more on: the task being completed, the workflow, and the practical learner outcome."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Keywords & Synonyms",
+            opportunity: "Generate keywords, synonyms, alternate workflow names, and customer-friendly phrases to improve discoverability.",
+            prompts: [
+              {
+                title: "Generate Keywords & Synonyms",
+                body: "Generate: keywords, related terminology, synonyms, alternate workflow names, and customer-friendly phrases that may improve discoverability for this learning asset."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Evaluate LLM Readiness Score",
+            opportunity: "Score a learning asset on LLM readiness (1–10) with strengths, weaknesses, and recommendations.",
+            prompts: [
+              {
+                title: "Evaluate LLM Readiness Score",
+                body: "Review this learning asset and provide: an LLM readiness score (1–10), strengths, weaknesses, and recommendations to improve AI discoverability and retrieval."
+              }
+            ],
+            tools: []
+          },
+          {
+            name: "Generate Structured Metadata",
+            opportunity: "Produce structured metadata: audience, workflow, task, product area, difficulty, outcome, related terminology, and searchable phrases.",
+            prompts: [
+              {
+                title: "Generate Structured Metadata",
+                body: "Create structured metadata for this learning asset including: audience, workflow, task, product area, difficulty level, business outcome, related terminology, and searchable phrases."
+              }
+            ],
+            tools: []
+          }
+        ]
+      }
+    ]
+  }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  team: "tw",            // "tw" or "cm"
+  deliverable: "release-notes",   // TW: deliverable key
+  area: "general-admin",          // CM: workflow-area key
+  phaseFilter: "all",
+  roleFilter: "all",
+  aiOnly: false,
+  view: "cards"
+};
+
+// ============================================================
+// RENDER
+// ============================================================
+
+// Helper: get current team data + selected key
+function getCurrentEntry() {
+  if (state.team === "tw") {
+    return { data: DATA, key: state.deliverable, entry: DATA[state.deliverable] };
+  }
+  return { data: CM_DATA, key: state.area, entry: CM_DATA[state.area] };
+}
+
+function renderDeliverables() {
+  const list = document.getElementById("deliverableList");
+  const label = document.getElementById("sidebarLabel");
+  list.innerHTML = "";
+
+  const { data } = getCurrentEntry();
+  label.textContent = state.team === "tw" ? "Deliverable" : "Responsibility Area";
+
+  Object.entries(data).forEach(([key, d], idx) => {
+    const li = document.createElement("li");
+    const selectedKey = state.team === "tw" ? state.deliverable : state.area;
+    li.className = "deliverable" + (selectedKey === key ? " active" : "");
+    li.innerHTML = `<span>${d.name}</span><span class="num">${String(idx + 1).padStart(2, "0")}</span>`;
+    li.addEventListener("click", () => {
+      if (state.team === "tw") state.deliverable = key;
+      else state.area = key;
+      state.phaseFilter = "all";
+      state.roleFilter = "all";
+      render();
+    });
+    list.appendChild(li);
+  });
+}
+
+function getCurrentRoles() {
+  if (state.team !== "tw") return [];
+  const d = DATA[state.deliverable];
+  const roles = new Set();
+  Object.values(d.phases).forEach(acts => acts.forEach(a => roles.add(a.role)));
+  return Array.from(roles);
+}
+
+function getCurrentPhases() {
+  if (state.team !== "tw") return [];
+  const d = DATA[state.deliverable];
+  return PHASE_ORDER.filter(p => d.phases[p]);
+}
+
+function countActivities(phaseFilter = "all", roleFilter = "all", aiOnly = false) {
+  if (state.team !== "tw") return { total: 0, withAi: 0 };
+  const d = DATA[state.deliverable];
+  let total = 0, withAi = 0;
+  Object.entries(d.phases).forEach(([phase, acts]) => {
+    if (phaseFilter !== "all" && phase !== phaseFilter) return;
+    acts.forEach(a => {
+      if (roleFilter !== "all" && a.role !== roleFilter) return;
+      const hasAi = a.tools && a.tools.length > 0;
+      if (aiOnly && !hasAi) return;
+      total++;
+      if (hasAi) withAi++;
+    });
+  });
+  return { total, withAi };
+}
+
+function countCMSubs(aiOnly = false) {
+  const entry = CM_DATA[state.area];
+  let total = 0, withPrompts = 0, withTools = 0;
+  entry.sections.forEach(section => {
+    section.items.forEach(item => {
+      const hasP = item.prompts && item.prompts.length > 0;
+      const hasT = item.tools && item.tools.length > 0;
+      if (aiOnly && !hasP && !hasT) return;
+      total++;
+      if (hasP) withPrompts++;
+      if (hasT) withTools++;
+    });
+  });
+  return { total, withPrompts, withTools };
+}
+
+function renderHeader() {
+  const { entry } = getCurrentEntry();
+  document.getElementById("crumbTeam").textContent = state.team === "tw" ? "Workflow" : "Responsibility";
+  document.getElementById("crumbName").textContent = entry.name;
+  document.getElementById("deliverableTitle").textContent = entry.name;
+
+  const statsEl = document.getElementById("stats");
+
+  if (state.team === "tw") {
+    const phases = getCurrentPhases();
+    const { total, withAi } = countActivities();
+    statsEl.innerHTML = `
+      <div class="stat"><strong>${phases.length}</strong> phases</div>
+      <div class="stat"><strong>${total}</strong> activities</div>
+      <div class="stat green"><strong>${withAi}</strong> with AI / Automation</div>
+    `;
+  } else {
+    const c = countCMSubs();
+    const parts = [`<div class="stat"><strong>${c.total}</strong> activities</div>`];
+    if (c.withTools > 0) parts.push(`<div class="stat green"><strong>${c.withTools}</strong> with AI / Automation</div>`);
+    parts.push(`<div class="stat yellow"><strong>${c.withPrompts}</strong> with Example Prompts</div>`);
+    statsEl.innerHTML = parts.join("");
+  }
+}
+
+function renderFilters() {
+  // Show/hide filter rows based on team
+  const phaseRow = document.getElementById("filterRowPhase");
+  const roleRow = document.getElementById("filterRowRole");
+  const viewRow = document.getElementById("filterRowView");
+
+  if (state.team === "tw") {
+    phaseRow.style.display = "";
+    roleRow.style.display = "";
+    viewRow.style.display = "";
+  } else {
+    // Learning Content: hide phase/role, keep view toggle visible
+    phaseRow.style.display = "none";
+    roleRow.style.display = "none";
+    viewRow.style.display = "";
+  }
+
+  // AI toggle (always visible)
+  const aiToggle = document.getElementById("aiToggle");
+  aiToggle.className = "toggle-ai" + (state.aiOnly ? " on" : "");
+  aiToggle.onclick = () => { state.aiOnly = !state.aiOnly; render(); };
+
+  if (state.team !== "tw") return;
+
+  // TW filters — Phase + Role pills
+  const phases = getCurrentPhases();
+  const roles = getCurrentRoles();
+
+  const phaseEl = document.getElementById("phaseFilters");
+  phaseEl.innerHTML = "";
+  const allPhase = document.createElement("button");
+  allPhase.className = "pill" + (state.phaseFilter === "all" ? " active" : "");
+  allPhase.innerHTML = `All <span class="count">${phases.length}</span>`;
+  allPhase.addEventListener("click", () => { state.phaseFilter = "all"; render(); });
+  phaseEl.appendChild(allPhase);
+
+  phases.forEach(p => {
+    const count = DATA[state.deliverable].phases[p].length;
+    const btn = document.createElement("button");
+    btn.className = "pill" + (state.phaseFilter === p ? " active" : "");
+    btn.innerHTML = `${p} <span class="count">${count}</span>`;
+    btn.addEventListener("click", () => { state.phaseFilter = p; render(); });
+    phaseEl.appendChild(btn);
+  });
+
+  const roleEl = document.getElementById("roleFilters");
+  roleEl.innerHTML = "";
+  const allRole = document.createElement("button");
+  allRole.className = "pill" + (state.roleFilter === "all" ? " active" : "");
+  allRole.innerHTML = `All roles <span class="count">${roles.length}</span>`;
+  allRole.addEventListener("click", () => { state.roleFilter = "all"; render(); });
+  roleEl.appendChild(allRole);
+
+  roles.forEach(r => {
+    const btn = document.createElement("button");
+    btn.className = "pill" + (state.roleFilter === r ? " active" : "");
+    btn.textContent = r;
+    btn.addEventListener("click", () => { state.roleFilter = r; render(); });
+    roleEl.appendChild(btn);
+  });
+}
+
+// ============================================================
+// LEARNING CONTENT — Cards View
+// Each item is its own activity card with everything inside:
+//   - opportunity (AI Opportunity)
+//   - optional Human Task bullets (Video Creation Workflow)
+//   - optional Example Prompts
+//   - AI / Automation placeholder for tool links
+// When an area has multiple `sections`, each section gets a small
+// group header above its cards.
+// ============================================================
+function renderCMCards() {
+  const wf = document.getElementById("workflow");
+  wf.innerHTML = "";
+
+  const area = CM_DATA[state.area];
+  const areaIdx = Object.keys(CM_DATA).indexOf(state.area);
+
+  // Area header
+  const headerEl = document.createElement("section");
+  headerEl.className = "phase";
+  headerEl.style.borderTop = "none";
+  headerEl.style.paddingTop = "0";
+  headerEl.style.paddingBottom = "0";
+  headerEl.innerHTML = `
+    <div class="phase-header">
+      <div class="phase-number">${String(areaIdx + 1).padStart(2, "0")}</div>
+      <div class="phase-title">${area.name}</div>
+    </div>
+  `;
+  wf.appendChild(headerEl);
+
+  // Each section renders as its own block. Section header shows whenever
+  // the section has a name (regardless of section count).
+  let anyShown = false;
+  let sectionAnimIdx = 0;
+
+  area.sections.forEach((section, sectionIdx) => {
+    const itemsFiltered = section.items.filter(item => {
+      if (!state.aiOnly) return true;
+      // AI-available = has prompts OR has tools attached
+      const hasP = item.prompts && item.prompts.length > 0;
+      const hasT = item.tools && item.tools.length > 0;
+      return hasP || hasT;
+    });
+
+    if (itemsFiltered.length === 0) return;
+    anyShown = true;
+
+    const sectionEl = document.createElement("section");
+    sectionEl.className = "lc-section";
+
+    if (section.name) {
+      sectionEl.innerHTML = `
+        <div class="lc-section-header">
+          <div class="lc-section-label">${section.name}</div>
+          <div class="lc-section-count">${itemsFiltered.length} ${itemsFiltered.length === 1 ? "item" : "items"}</div>
+        </div>
+      `;
+    }
+
+    const activitiesEl = document.createElement("div");
+    activitiesEl.className = "activities";
+
+    itemsFiltered.forEach(item => {
+      const hasPrompts = item.prompts && item.prompts.length > 0;
+      const hasTools = item.tools && item.tools.length > 0;
+
+      // Color coding: green when tools/automations exist, yellow when only prompts
+      let stateClass = "";
+      if (hasTools) stateClass = " has-ai";
+      else if (hasPrompts) stateClass = " has-prompts";
+
+      const card = document.createElement("div");
+      card.className = "activity" + stateClass;
+      card.style.animationDelay = `${sectionAnimIdx * 0.04}s`;
+      card.style.cursor = "pointer";
+      sectionAnimIdx++;
+
+      const opportunityPreview = item.opportunity.length > 140
+        ? item.opportunity.slice(0, 140).trim() + "…"
+        : item.opportunity;
+
+      const footerPieces = [];
+      if (hasTools) {
+        footerPieces.push(`<div class="ai-tool">${item.tools.length} AI / Automation</div>`);
+      }
+      if (hasPrompts) {
+        const label = item.prompts.length === 1 ? "example prompt" : "example prompts";
+        footerPieces.push(`<div class="ai-tool prompt">${item.prompts.length} ${label}</div>`);
+      }
+      const footerHtml = footerPieces.length > 0
+        ? `<div class="ai-tools">${footerPieces.join("")}</div>`
+        : `<div class="no-ai">No AI / Automation yet</div>`;
+
+      card.innerHTML = `
+        <div class="activity-name">${item.name}</div>
+        <div class="activity-role">AI Opportunity</div>
+        <div style="font-size: 13px; color: var(--ink-soft); line-height: 1.45; margin-bottom: 4px;">${opportunityPreview}</div>
+        ${footerHtml}
+      `;
+
+      card.addEventListener("click", () => openCMDetail(item, area, section));
+      activitiesEl.appendChild(card);
+    });
+
+    sectionEl.appendChild(activitiesEl);
+    wf.appendChild(sectionEl);
+  });
+
+  if (!anyShown) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No items match the current filter.";
+    wf.appendChild(empty);
+  }
+}
+
+// ============================================================
+// LEARNING CONTENT — Flowchart View
+// Each item is a node, sections separated by group dividers,
+// arrows connect consecutive items within a section.
+// ============================================================
+function renderCMFlow() {
+  const fc = document.getElementById("flowchart");
+  fc.innerHTML = "";
+
+  const area = CM_DATA[state.area];
+
+  let anyShown = false;
+
+  area.sections.forEach((section, sectionIdx) => {
+    const itemsFiltered = section.items.filter(item => {
+      if (!state.aiOnly) return true;
+      const hasP = item.prompts && item.prompts.length > 0;
+      const hasT = item.tools && item.tools.length > 0;
+      return hasP || hasT;
+    });
+
+    if (itemsFiltered.length === 0) return;
+    anyShown = true;
+
+    // Group header before the row of nodes — show when section has a name
+    if (section.name) {
+      const groupHeader = document.createElement("div");
+      groupHeader.className = "lc-flow-group-header";
+      groupHeader.innerHTML = `
+        <div class="lc-section-label">${section.name}</div>
+        <div class="lc-section-count">${itemsFiltered.length} ${itemsFiltered.length === 1 ? "item" : "items"}</div>
+      `;
+      fc.appendChild(groupHeader);
+    }
+
+    // Row of nodes for this section
+    const row = document.createElement("div");
+    row.className = "lc-flow-row";
+
+    // Detect if this section is a numbered sequence (e.g., "1 — Identify Topic")
+    const isSequence = itemsFiltered.every(item => /^\d+\s*[—-]/.test(item.name));
+
+    itemsFiltered.forEach((item, idx) => {
+      const hasPrompts = item.prompts && item.prompts.length > 0;
+      const hasTools = item.tools && item.tools.length > 0;
+
+      let stateClass = "";
+      if (hasTools) stateClass = " has-ai";
+      else if (hasPrompts) stateClass = " has-prompts";
+
+      const node = document.createElement("div");
+      node.className = "flow-node-standalone" + stateClass;
+
+      let badgeContent = "";
+      if (hasTools || hasPrompts) {
+        const parts = [];
+        if (hasTools) parts.push(`${item.tools.length} AI/A`);
+        if (hasPrompts) parts.push(`${item.prompts.length} Example Prompt${item.prompts.length === 1 ? "" : "s"}`);
+        badgeContent = `<div class="flow-node-ai-badge${hasTools ? "" : " prompt"}">${parts.join(" · ")}</div>`;
+      }
+
+      const opportunityPreview = item.opportunity.length > 110
+        ? item.opportunity.slice(0, 110).trim() + "…"
+        : item.opportunity;
+
+      node.innerHTML = `
+        ${badgeContent}
+        <div class="flow-node-name">${item.name}</div>
+        <div class="flow-node-kind">AI Opportunity</div>
+        <div style="font-size: 11.5px; color: var(--ink-soft); line-height: 1.4; margin-top: 6px;">${opportunityPreview}</div>
+      `;
+      node.addEventListener("click", () => openCMDetail(item, area, section));
+      row.appendChild(node);
+
+      // Arrow between consecutive nodes — only when items are a numbered sequence
+      if (isSequence && idx < itemsFiltered.length - 1) {
+        const arrow = document.createElement("div");
+        arrow.className = "flow-arrow-standalone";
+        arrow.innerHTML = `<svg viewBox="0 0 28 18" fill="none" preserveAspectRatio="none">
+          <path d="M4 9 L20 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M17 5 L22 9 L17 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>`;
+        row.appendChild(arrow);
+      }
+    });
+
+    fc.appendChild(row);
+  });
+
+  if (!anyShown) {
+    fc.innerHTML = `<div class="empty-state" style="width:100%">No items match the current filter.</div>`;
+  }
+}
+
+// ============================================================
+// LEARNING CONTENT — Detail Modal
+// Sections: AI Opportunity, optional Human Task, AI / Automation,
+// Example Prompts. Same modal for all items, populated as needed.
+// ============================================================
+function openCMDetail(item, area, section) {
+  const card = document.getElementById("flowDetailCard");
+  const hasPrompts = item.prompts && item.prompts.length > 0;
+  const hasTools = item.tools && item.tools.length > 0;
+  const hasHuman = item.human && item.human.length > 0;
+
+  // Crumb shows area name; if section has a name, append it
+  let crumb = area.name;
+  if (section && section.name) crumb += " · " + section.name;
+
+  // Human Task section
+  const humanHtml = hasHuman ? `
+    <div class="cm-detail-section">
+      <div class="flow-detail-tools-label">Human Task</div>
+      <ul class="cm-bullet-list">
+        ${item.human.map(h => `<li>${h}</li>`).join("")}
+      </ul>
+    </div>
+  ` : "";
+
+  // AI / Automation section (always rendered as placeholder)
+  let toolsHtml;
+  if (hasTools) {
+    toolsHtml = `
+      <div class="cm-detail-section">
+        <div class="flow-detail-tools-label">AI / Automation</div>
+        ${item.tools.map(t => {
+          const url = t.url || TOOL_URLS[t.name];
+          const inner = `
+            <span class="flow-detail-tool-type">${t.tag || (t.type === "prompt" ? "Prompt" : "Tool")}</span>
+            <span class="flow-detail-tool-name">${t.name}</span>
+            ${url ? '<span class="flow-detail-tool-arrow">↗</span>' : ''}
+          `;
+          const cls = `flow-detail-tool ${t.type === "prompt" ? "prompt" : ""}${url ? " clickable" : ""}`;
+          if (url) {
+            return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+          }
+          return `<div class="${cls}">${inner}</div>`;
+        }).join("")}
+      </div>
+    `;
+  } else {
+    toolsHtml = `
+      <div class="cm-detail-section">
+        <div class="flow-detail-tools-label">AI / Automation</div>
+        <div class="flow-detail-empty">No tools or automations attached yet.</div>
+      </div>
+    `;
+  }
+
+  // Example Prompts section
+  const promptsHtml = hasPrompts ? `
+    <div class="cm-detail-section">
+      <div class="flow-detail-tools-label">Example Prompts</div>
+      ${item.prompts.map((p, idx) => `
+        <div class="cm-prompt">
+          <div class="cm-prompt-header">
+            <div class="cm-prompt-title">${p.title}</div>
+            <button class="cm-prompt-copy" data-prompt-idx="${idx}" title="Copy prompt">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="10" rx="1.5"/><path d="M11 4V2.5A1.5 1.5 0 0 0 9.5 1h-5A1.5 1.5 0 0 0 3 2.5v8A1.5 1.5 0 0 0 4.5 12"/></svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="cm-prompt-body">${p.body.replace(/</g, '&lt;')}</pre>
+        </div>
+      `).join("")}
+    </div>
+  ` : `
+    <div class="cm-detail-section">
+      <div class="flow-detail-tools-label">Example Prompts</div>
+      <div class="flow-detail-empty">No example prompts for this item.</div>
+    </div>
+  `;
+
+  card.innerHTML = `
+    <button class="flow-detail-close" onclick="closeDetail()">×</button>
+    <div class="flow-detail-phase">${crumb}</div>
+    <div class="flow-detail-name">${item.name}</div>
+
+    <div class="cm-detail-section">
+      <div class="flow-detail-tools-label">AI Opportunity</div>
+      <p class="cm-opportunity">${item.opportunity}</p>
+    </div>
+
+    ${humanHtml}
+    ${toolsHtml}
+    ${promptsHtml}
+  `;
+
+  // Wire up copy buttons
+  card.querySelectorAll(".cm-prompt-copy").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const idx = parseInt(btn.dataset.promptIdx, 10);
+      const text = item.prompts[idx].body;
+      const showCopied = () => {
+        const label = btn.querySelector("span");
+        label.textContent = "Copied";
+        btn.classList.add("copied");
+        setTimeout(() => { label.textContent = "Copy"; btn.classList.remove("copied"); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (err) {}
+          document.body.removeChild(ta);
+          showCopied();
+        });
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (err) {}
+        document.body.removeChild(ta);
+        showCopied();
+      }
+    });
+  });
+
+  document.getElementById("flowDetail").classList.add("open");
+}
+
+function renderWorkflow() {
+  const wf = document.getElementById("workflow");
+  wf.innerHTML = "";
+
+  const d = DATA[state.deliverable];
+  const phases = getCurrentPhases();
+
+  let anyVisible = false;
+
+  phases.forEach((phase, phaseIdx) => {
+    const activities = d.phases[phase];
+
+    // Filter activities
+    const filtered = activities.filter(a => {
+      if (state.roleFilter !== "all" && a.role !== state.roleFilter) return false;
+      if (state.aiOnly && (!a.tools || a.tools.length === 0)) return false;
+      return true;
+    });
+
+    const phaseIsHidden = state.phaseFilter !== "all" && state.phaseFilter !== phase;
+    if (phaseIsHidden) return;
+    if (filtered.length === 0) return;
+
+    anyVisible = true;
+
+    const phaseEl = document.createElement("section");
+    phaseEl.className = "phase";
+
+    phaseEl.innerHTML = `
+      <div class="phase-header">
+        <div class="phase-number">${String(phaseIdx + 1).padStart(2, "0")}</div>
+        <div class="phase-title">${phase}</div>
+        <div class="phase-count">${filtered.length} ${filtered.length === 1 ? "activity" : "activities"}</div>
+      </div>
+      <div class="activities"></div>
+    `;
+
+    const actsEl = phaseEl.querySelector(".activities");
+
+    filtered.forEach((a, idx) => {
+      const hasAi = a.tools && a.tools.length > 0;
+      const actEl = document.createElement("div");
+      actEl.className = "activity" + (hasAi ? " has-ai" : "");
+      actEl.style.animationDelay = `${idx * 0.04}s`;
+
+      let toolsHtml = "";
+      if (hasAi) {
+        toolsHtml = `<div class="ai-tools">${a.tools.map(t => {
+          const url = TOOL_URLS[t.name];
+          const cls = `ai-tool ${t.type === "prompt" ? "prompt" : ""}`;
+          if (url) {
+            return `<a class="${cls} clickable" href="${url}" target="_blank" rel="noopener noreferrer" title="Open ${t.name}">${t.name}</a>`;
+          }
+          return `<div class="${cls}">${t.name}</div>`;
+        }).join("")}</div>`;
+      } else {
+        toolsHtml = `<div class="no-ai">No AI yet</div>`;
+      }
+
+      actEl.innerHTML = `
+        <div class="activity-name">${a.name}</div>
+        <div class="activity-role">${a.role}</div>
+        ${toolsHtml}
+      `;
+      actsEl.appendChild(actEl);
+    });
+
+    wf.appendChild(phaseEl);
+  });
+
+  if (!anyVisible) {
+    wf.innerHTML = `<div class="empty-state">No activities match the current filters.</div>`;
+  }
+}
+
+function renderFlowchart() {
+  const fc = document.getElementById("flowchart");
+  fc.innerHTML = "";
+
+  const d = DATA[state.deliverable];
+  const phases = getCurrentPhases();
+
+  // Apply phase filter — but in flowchart, hidden phases just don't appear
+  const visiblePhases = phases.filter(p => state.phaseFilter === "all" || state.phaseFilter === p);
+
+  let anyVisible = false;
+
+  visiblePhases.forEach((phase, idx) => {
+    const activities = d.phases[phase];
+    const filtered = activities.filter(a => {
+      if (state.roleFilter !== "all" && a.role !== state.roleFilter) return false;
+      if (state.aiOnly && (!a.tools || a.tools.length === 0)) return false;
+      return true;
+    });
+
+    if (filtered.length === 0) return;
+    anyVisible = true;
+
+    const phaseEl = document.createElement("div");
+    phaseEl.className = "flow-phase";
+
+    const phaseIdx = phases.indexOf(phase);
+    phaseEl.innerHTML = `
+      <div class="flow-phase-header">
+        <span class="phase-num">${String(phaseIdx + 1).padStart(2, "0")}</span>${phase}
+      </div>
+      <div class="flow-nodes"></div>
+    `;
+
+    const nodesEl = phaseEl.querySelector(".flow-nodes");
+
+    filtered.forEach(a => {
+      const hasAi = a.tools && a.tools.length > 0;
+      const node = document.createElement("div");
+      node.className = "flow-node" + (hasAi ? " has-ai" : "");
+      node.innerHTML = `
+        ${hasAi ? `<div class="flow-node-ai-badge">AI · ${a.tools.length}</div>` : ""}
+        <div class="flow-node-name">${a.name}</div>
+        <div class="flow-node-role">${a.role}</div>
+      `;
+      node.addEventListener("click", () => openDetail(a, phase));
+      nodesEl.appendChild(node);
+    });
+
+    fc.appendChild(phaseEl);
+
+    // Add arrow between phases (not after the last visible one)
+    if (idx < visiblePhases.length - 1) {
+      const arrow = document.createElement("div");
+      arrow.className = "flow-arrow";
+      arrow.innerHTML = `<svg viewBox="0 0 28 18" fill="none" preserveAspectRatio="none">
+        <path d="M4 9 L20 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M17 5 L22 9 L17 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>`;
+      fc.appendChild(arrow);
+    }
+  });
+
+  if (!anyVisible) {
+    fc.innerHTML = `<div class="empty-state" style="width:100%">No activities match the current filters.</div>`;
+  }
+}
+
+function openDetail(activity, phase) {
+  const card = document.getElementById("flowDetailCard");
+  const hasAi = activity.tools && activity.tools.length > 0;
+
+  let toolsHtml = "";
+  if (hasAi) {
+    toolsHtml = `
+      <div class="flow-detail-tools-label">AI & Automation Available</div>
+      ${activity.tools.map(t => {
+        const url = TOOL_URLS[t.name];
+        const inner = `
+          <span class="flow-detail-tool-type">${t.tag || (t.type === "prompt" ? "Prompt" : "Tool")}</span>
+          <span class="flow-detail-tool-name">${t.name}</span>
+          ${url ? '<span class="flow-detail-tool-arrow">↗</span>' : ''}
+        `;
+        const cls = `flow-detail-tool ${t.type === "prompt" ? "prompt" : ""}${url ? " clickable" : ""}`;
+        if (url) {
+          return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+        }
+        return `<div class="${cls}">${inner}</div>`;
+      }).join("")}
+    `;
+  } else {
+    toolsHtml = `
+      <div class="flow-detail-tools-label">AI & Automation</div>
+      <div class="flow-detail-empty">No AI or automation available yet for this activity.</div>
+    `;
+  }
+
+  card.innerHTML = `
+    <button class="flow-detail-close" onclick="closeDetail()">×</button>
+    <div class="flow-detail-phase">${phase}</div>
+    <div class="flow-detail-name">${activity.name}</div>
+    <div class="flow-detail-role">${activity.role}</div>
+    ${toolsHtml}
+  `;
+
+  document.getElementById("flowDetail").classList.add("open");
+}
+
+function closeDetail() {
+  document.getElementById("flowDetail").classList.remove("open");
+}
+
+// Close detail on backdrop click
+document.getElementById("flowDetail").addEventListener("click", (e) => {
+  if (e.target.id === "flowDetail") closeDetail();
+});
+
+// Close on escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeDetail();
+});
+
+// View toggle wiring
+document.getElementById("viewToggle").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  state.view = btn.dataset.view;
+  render();
+});
+
+// Team switcher wiring
+function updateTeamPill() {
+  const switcher = document.getElementById("teamSwitcher");
+  const pill = document.getElementById("teamPill");
+  const activeBtn = switcher.querySelector(".team-btn.active");
+  if (!activeBtn) return;
+  pill.style.left = activeBtn.offsetLeft + "px";
+  pill.style.width = activeBtn.offsetWidth + "px";
+}
+
+// Wait for fonts to settle before initial positioning
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(updateTeamPill);
+}
+window.addEventListener("load", updateTeamPill);
+
+document.getElementById("teamSwitcher").addEventListener("click", (e) => {
+  const btn = e.target.closest(".team-btn");
+  if (!btn) return;
+  const newTeam = btn.dataset.team;
+  if (newTeam === state.team) return;
+
+  state.team = newTeam;
+  state.phaseFilter = "all";
+  state.roleFilter = "all";
+  state.aiOnly = false;
+
+  // Update active button class
+  document.querySelectorAll(".team-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.team === newTeam);
+  });
+
+  // Swap lede copy
+  document.getElementById("lede").textContent = newTeam === "tw"
+    ? "A working map of where approved AI and automation fit into the documentation work you already do. Select a deliverable, narrow by phase or role, and surface what's available — and what isn't yet."
+    : "The AI Efficiency Playbook for Training & Delivery — practical examples of where AI can support Learning Content work. Select a workflow area, click any card to see the AI opportunity, available tools, and example prompts.";
+
+  updateTeamPill();
+  render();
+});
+
+window.addEventListener("resize", updateTeamPill);
+
+function render() {
+  renderDeliverables();
+  renderHeader();
+  renderFilters();
+
+  // Toggle view containers
+  const cardsView = document.getElementById("workflow");
+  const flowView = document.getElementById("flowchartWrap");
+  const respView = document.getElementById("respMap");
+  const toggleBtns = document.querySelectorAll("#viewToggle button");
+
+  toggleBtns.forEach(b => b.classList.toggle("active", b.dataset.view === state.view));
+
+  // Hide the legacy responsibility map container; CM now uses the cards view
+  respView.style.display = "none";
+
+  if (state.team === "cm") {
+    // Learning Content — supports both views
+    if (state.view === "cards") {
+      cardsView.style.display = "";
+      flowView.style.display = "none";
+      renderCMCards();
+    } else {
+      cardsView.style.display = "none";
+      flowView.style.display = "block";
+      renderCMFlow();
+    }
+  } else if (state.view === "cards") {
+    cardsView.style.display = "";
+    flowView.style.display = "none";
+    renderWorkflow();
+  } else {
+    cardsView.style.display = "none";
+    flowView.style.display = "block";
+    renderFlowchart();
+  }
+}
+
+// ============================================================
+// REMOTE DATA SYNC — fetch data.json from GitHub raw on load
+// and merge its solutions into the inline TW DATA / CM_DATA.
+// Activities are still inlined; only solutions come from JSON.
+// If the fetch fails, the inlined data is used as a fallback.
+// ============================================================
+const DATA_URL = "https://raw.githubusercontent.com/jedortega-deltek/aiworkflows/main/data.json";
+
+async function syncSolutionsFromJson() {
+  try {
+    // Cache-bust with a query param so updates appear without manual refresh
+    // bypass (GitHub raw's CDN still caches ~5 min)
+    const resp = await fetch(DATA_URL + "?_=" + Date.now(), { cache: "no-store" });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const json = await resp.json();
+    applySolutionsFromJson(json);
+    console.info("[ai-workflows] Loaded " + (json.solutions || []).length + " solutions from data.json");
+  } catch (err) {
+    console.warn("[ai-workflows] Could not fetch live data.json — using inlined data. Reason:", err.message);
+  }
+}
+
+function applySolutionsFromJson(json) {
+  if (!json || !Array.isArray(json.solutions)) return;
+
+  // Look up TW deliverable by display name
+  const twByName = {};
+  Object.entries(DATA).forEach(([key, info]) => { twByName[info.name] = info; });
+
+  // Look up LC area by display name
+  const lcByName = {};
+  Object.entries(CM_DATA).forEach(([key, info]) => { lcByName[info.name] = info; });
+
+  // Clear all tools / prompts arrays so we start fresh
+  Object.values(DATA).forEach(deliv => {
+    Object.values(deliv.phases).forEach(activities => {
+      activities.forEach(act => { act.tools = []; });
+    });
+  });
+  Object.values(CM_DATA).forEach(area => {
+    area.sections.forEach(section => {
+      section.items.forEach(item => {
+        item.tools = [];
+        item.prompts = [];
+      });
+    });
+  });
+
+  // Walk every solution's attachments and inject
+  json.solutions.forEach(sol => {
+    (sol.attached_to || []).forEach(att => {
+      if (att.team === "Technical Writers") {
+        const deliv = twByName[att.category];
+        if (!deliv) return;
+        const phaseActs = deliv.phases[att.section];
+        if (!phaseActs) return;
+        const act = phaseActs.find(a => a.name === att.activity);
+        if (!act) return;
+        const entry = {
+          name: sol.title,
+          type: sol.tag && sol.tag.toLowerCase() === "prompt" ? "prompt" : "tool",
+          tag: sol.tag || (sol.type === "example-prompt" ? "Example Prompt" : "Tool")
+        };
+        if (sol.link) entry.url = sol.link;
+        act.tools.push(entry);
+      } else if (att.team === "Learning Content") {
+        const area = lcByName[att.category];
+        if (!area) return;
+        const section = area.sections.find(s => (s.name || "") === (att.section || ""));
+        if (!section) return;
+        const item = section.items.find(i => i.name === att.activity);
+        if (!item) return;
+        if (sol.type === "example-prompt") {
+          item.prompts.push({
+            title: sol.title,
+            body: sol.prompt || ""
+          });
+        } else {
+          const entry = {
+            name: sol.title,
+            type: sol.tag && sol.tag.toLowerCase() === "prompt" ? "prompt" : "tool",
+            tag: sol.tag || "Tool"
+          };
+          if (sol.link) entry.url = sol.link;
+          item.tools.push(entry);
+        }
+      }
+    });
+  });
+}
+
+// Initial paint — fetch JSON first, then render
+(async function init() {
+  await syncSolutionsFromJson();
+  updateTeamPill();
+  render();
+})();
+</script>
+</body>
+</html>
