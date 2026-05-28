@@ -139,6 +139,31 @@
     margin-bottom: 48px;
     font-weight: 300;
   }
+  .lede-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--deltek-blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+    padding-bottom: 1px;
+  }
+  .lede-link:hover {
+    border-bottom-color: var(--deltek-blue);
+  }
+  .lede-link-arrow {
+    font-size: 12px;
+    opacity: 0.7;
+    transition: transform 0.15s ease;
+  }
+  .lede-link:hover .lede-link-arrow {
+    transform: translate(2px, -2px);
+    opacity: 1;
+  }
 
   /* LAYOUT */
   .layout {
@@ -1621,7 +1646,7 @@
   </button>
   <button class="team-btn" data-team="cm">
     <span class="team-btn-indicator"></span>
-    Learning Content
+    Training &amp; Delivery
   </button>
 </div>
 
@@ -4582,9 +4607,9 @@ document.getElementById("teamSwitcher").addEventListener("click", (e) => {
   });
 
   // Swap lede copy
-  document.getElementById("lede").textContent = newTeam === "tw"
+  document.getElementById("lede").innerHTML = newTeam === "tw"
     ? "A working map of where approved AI and automation fit into the documentation work you already do. Select a deliverable, narrow by phase or role, and surface what's available — and what isn't yet."
-    : "The AI Efficiency Playbook for Training & Delivery — practical examples of where AI can support Learning Content work. Select a workflow area, click any card to see the AI opportunity, available tools, and example prompts.";
+    : `Practical examples of where AI can support Training &amp; Delivery work. Select a workflow area, click any card to see the AI opportunity, available tools, and example prompts.<br><a class="lede-link" href="https://delteko365-my.sharepoint.com/:w:/r/personal/annemariedixon_deltek_com/Documents/Documents/01%20Leadership%20%26%20Management/Systems%20%26%20Processes/AI%20for%20Learning%20Content.docx?d=wd89ce2f79861472d885b1a46f451d456&amp;csf=1&amp;web=1&amp;e=fk0N5U" target="_blank" rel="noopener noreferrer">The AI Efficiency Playbook for Training &amp; Delivery <span class="lede-link-arrow">↗</span></a>`;
 
   updateTeamPill();
   render();
