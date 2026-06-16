@@ -548,6 +548,75 @@
     background: rgba(184, 84, 50, 0.1);
   }
 
+  /* Chip variant with inline copy button (TW card view) */
+  .ai-tool.chip-with-copy {
+    align-items: center;
+    padding: 2px 4px 2px 4px;
+    margin: -2px -4px;
+    border-radius: 3px;
+    transition: background 0.15s ease;
+  }
+  .ai-tool.chip-with-copy:hover {
+    background: rgba(74, 107, 74, 0.08);
+  }
+  .ai-tool.chip-with-copy.prompt:hover {
+    background: rgba(184, 84, 50, 0.08);
+  }
+  .ai-tool .ai-tool-name-link {
+    flex: 1;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  a.ai-tool-name-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .ai-tool-copy {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 3px;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .ai-tool.chip-with-copy:hover .ai-tool-copy {
+    opacity: 1;
+  }
+  .ai-tool-copy:hover {
+    color: var(--sage);
+    background: rgba(74, 107, 74, 0.12);
+  }
+  .ai-tool.prompt .ai-tool-copy:hover {
+    color: var(--rust);
+    background: rgba(184, 84, 50, 0.12);
+  }
+  .ai-tool-copy.copied {
+    color: var(--sage);
+    opacity: 1;
+  }
+  .ai-tool-copy svg {
+    width: 12px;
+    height: 12px;
+  }
+  /* When copied, swap the icon for a checkmark via CSS */
+  .ai-tool-copy.copied svg path,
+  .ai-tool-copy.copied svg rect {
+    display: none;
+  }
+  .ai-tool-copy.copied::after {
+    content: '✓';
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
   .no-ai {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
@@ -1130,6 +1199,60 @@
     background: var(--rust);
   }
 
+  /* Row wrapper that pairs a tool link with a copy button */
+  .flow-detail-tool-row {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .flow-detail-tool-row > .flow-detail-tool {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  .flow-detail-tool-copy {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 10px;
+    cursor: pointer;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .flow-detail-tool-copy:hover {
+    color: var(--sage);
+    background: var(--sage-bg);
+    border-color: var(--sage-light);
+  }
+  .flow-detail-tool-row .flow-detail-tool.prompt + .flow-detail-tool-copy:hover {
+    color: var(--rust);
+    background: rgba(184, 84, 50, 0.1);
+    border-color: rgba(184, 84, 50, 0.3);
+  }
+  .flow-detail-tool-copy svg {
+    width: 14px;
+    height: 14px;
+  }
+  .flow-detail-tool-copy.copied {
+    color: var(--sage);
+    background: var(--sage-bg);
+    border-color: var(--sage-light);
+  }
+  .flow-detail-tool-copy.copied svg path,
+  .flow-detail-tool-copy.copied svg rect {
+    display: none;
+  }
+  .flow-detail-tool-copy.copied::after {
+    content: '✓';
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
   .flow-detail-empty {
     background: var(--bg);
     border-radius: 4px;
@@ -1687,11 +1810,11 @@
       <div class="filter-row" id="filterRowView">
         <div class="filter-label">View</div>
         <div class="view-toggle" id="viewToggle">
-          <button data-view="cards" class="active">
+          <button data-view="cards">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1"/><rect x="9" y="9" width="5.5" height="5.5" rx="1"/></svg>
             Cards
           </button>
-          <button data-view="flow">
+          <button data-view="flow" class="active">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="0.75" y="5" width="4" height="6" rx="0.5"/><rect x="11.25" y="5" width="4" height="6" rx="0.5"/><path d="M4.75 8 L11.25 8" stroke-linecap="round"/><path d="M9.5 6.5 L11.25 8 L9.5 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Flowchart
           </button>
@@ -3854,7 +3977,7 @@ let state = {
   phaseFilter: "all",
   roleFilter: "all",
   aiOnly: false,
-  view: "cards"
+  view: "flow"
 };
 
 // ============================================================
@@ -4419,10 +4542,16 @@ function renderWorkflow() {
         toolsHtml = `<div class="ai-tools">${a.tools.map(t => {
           const url = TOOL_URLS[t.name];
           const cls = `ai-tool ${t.type === "prompt" ? "prompt" : ""}`;
-          if (url) {
-            return `<a class="${cls} clickable" href="${url}" target="_blank" rel="noopener noreferrer" title="Open ${t.name}">${t.name}</a>`;
-          }
-          return `<div class="${cls}">${t.name}</div>`;
+          // Each chip: clickable name (opens URL if present) + copy button
+          const nameHtml = url
+            ? `<a class="ai-tool-name-link" href="${url}" target="_blank" rel="noopener noreferrer" title="Open ${t.name}">${t.name}</a>`
+            : `<span class="ai-tool-name-link" title="${t.name}">${t.name}</span>`;
+          return `<div class="${cls} chip-with-copy">
+            ${nameHtml}
+            <button class="ai-tool-copy" data-copy="${t.name.replace(/"/g, "&quot;")}" title="Copy title" aria-label="Copy title">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="9" height="10" rx="1.5"/><path d="M11 4V2.5A1.5 1.5 0 0 0 9.5 1h-5A1.5 1.5 0 0 0 3 2.5v8A1.5 1.5 0 0 0 4.5 12"/></svg>
+            </button>
+          </div>`;
         }).join("")}</div>`;
       } else {
         toolsHtml = `<div class="no-ai">No AI yet</div>`;
@@ -4522,16 +4651,25 @@ function openDetail(activity, phase) {
       <div class="flow-detail-tools-label">AI & Automation Available</div>
       ${activity.tools.map(t => {
         const url = TOOL_URLS[t.name];
-        const inner = `
+        const nameAndArrow = `
           <span class="flow-detail-tool-type">${t.tag || (t.type === "prompt" ? "Prompt" : "Tool")}</span>
           <span class="flow-detail-tool-name">${t.name}</span>
           ${url ? '<span class="flow-detail-tool-arrow">↗</span>' : ''}
         `;
-        const cls = `flow-detail-tool ${t.type === "prompt" ? "prompt" : ""}${url ? " clickable" : ""}`;
+        const rowCls = `flow-detail-tool ${t.type === "prompt" ? "prompt" : ""}${url ? " clickable" : ""}`;
+        const copyBtn = `<button class="flow-detail-tool-copy" data-copy="${t.name.replace(/"/g, "&quot;")}" title="Copy title" aria-label="Copy title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="9" height="10" rx="1.5"/><path d="M11 4V2.5A1.5 1.5 0 0 0 9.5 1h-5A1.5 1.5 0 0 0 3 2.5v8A1.5 1.5 0 0 0 4.5 12"/></svg>
+        </button>`;
         if (url) {
-          return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+          return `<div class="flow-detail-tool-row">
+            <a class="${rowCls}" href="${url}" target="_blank" rel="noopener noreferrer">${nameAndArrow}</a>
+            ${copyBtn}
+          </div>`;
         }
-        return `<div class="${cls}">${inner}</div>`;
+        return `<div class="flow-detail-tool-row">
+          <div class="${rowCls}">${nameAndArrow}</div>
+          ${copyBtn}
+        </div>`;
       }).join("")}
     `;
   } else {
@@ -4616,6 +4754,46 @@ document.getElementById("teamSwitcher").addEventListener("click", (e) => {
 });
 
 window.addEventListener("resize", updateTeamPill);
+
+// ============================================================
+// Global copy-button handler — any element with [data-copy]
+// will copy its data-copy value to the clipboard on click.
+// Used by the small copy buttons next to AI/Automation entries.
+// ============================================================
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest("[data-copy]");
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const text = btn.dataset.copy;
+  const flashCopied = () => {
+    btn.classList.add("copied");
+    setTimeout(() => btn.classList.remove("copied"), 1400);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(flashCopied).catch(() => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (err) {}
+      document.body.removeChild(ta);
+      flashCopied();
+    });
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (err) {}
+    document.body.removeChild(ta);
+    flashCopied();
+  }
+});
 
 function render() {
   renderDeliverables();
